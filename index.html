@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Instituto Chileno de Derecho Tributario — 65 años promoviendo el estudio y desarrollo del Derecho Tributario en Chile." />
+  <title>Instituto Chileno de Derecho Tributario - ICHDT</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary":                "#044D8C",
+            "secondary":              "#1BCBF2",
+            "background":             "#FDFDFD",
+            "surface":                "#FFFFFF",
+            "on-surface":             "#1A1C1E",
+            "on-surface-variant":     "#44474E",
+            "outline-variant":        "#E1E2E8",
+            "surface-container-low":  "#F7F9FC",
+          },
+          fontFamily: {
+            "headline": ["Libre Caslon Text", "serif"],
+            "body":     ["Open Sans", "sans-serif"],
+          },
+          maxWidth: {
+            "site": "1280px",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ─── Material Icons ─────────────────────────────────────── */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ─── Scroll reveal ──────────────────────────────────────── */
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Nav underline hover ────────────────────────────────── */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 2px;
+      bottom: -4px; left: 0;
+      background-color: #044D8C;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── Decoración línea bajo títulos ──────────────────────── */
+    .title-bar {
+      display: block;
+      width: 72px; height: 3px;
+      background-color: #1BCBF2;
+      border-radius: 99px;
+      margin-top: 14px;
+    }
+
+    /* ─── Sombra suave en tarjetas ───────────────────────────── */
+    .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); }
+    .card-hover {
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px -10px rgba(0,0,0,0.12);
+    }
+
+    /* ─── Hero carousel ──────────────────────────────────────── */
+    .carousel-wrap {
+      position: relative;
+      width: 100%;
+      height: 720px;
+      overflow: hidden;
+    }
+    @media (max-width: 639px) {
+      .carousel-wrap { height: 520px; }
+    }
+    .carousel-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      display: flex; align-items: center;
+      z-index: 0;
+    }
+    .carousel-slide.active { opacity: 1; z-index: 10; }
+
+    .carousel-slide img.bg-photo {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transform: scale(1.08);
+      transition: transform 10s linear;
+    }
+    .carousel-slide.active img.bg-photo { transform: scale(1); }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 10px;
+      z-index: 20;
+    }
+    .dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .dot.active {
+      background: #1BCBF2;
+      width: 30px;
+      border-radius: 6px;
+    }
+
+    /* ─── Scroll to top ──────────────────────────────────────── */
+    #btn-top {
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #btn-top.visible { opacity: 1; visibility: visible; }
+
+    /* ─── Métricas count-up ──────────────────────────────────── */
+    .counter-num {
+      display: inline-block;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── Mobile menu ────────────────────────────────────────── */
+    #mobile-menu {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    #mobile-menu.open { max-height: 400px; }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-secondary/30">
+
+<!-- ════════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════ -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 bg-white border-b border-outline-variant/50 transition-shadow duration-300">
+  <div class="max-w-site mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-20 py-3">
+
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center shrink-0">
+      <img
+        src="img/logo-ichdt.png"
+        alt="Instituto Chileno de Derecho Tributario"
+        class="h-10 sm:h-14 w-auto object-contain"
+      />
+    </a>
+
+    <!-- Nav Desktop -->
+    <nav class="hidden md:flex gap-8 items-center">
+      <a href="#inicio"    class="nav-link text-primary font-bold text-sm tracking-wide">Inicio</a>
+      <a href="#nosotros"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Quiénes Somos</a>
+      <a href="#noticias"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Noticias</a>
+      <a href="#red"       class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Publicaciones</a>
+      <a href="#contacto"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Contacto</a>
+    </nav>
+
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-4">
+      <a href="#contacto" class="hidden md:inline-flex bg-secondary text-white px-7 py-2.5 font-bold text-sm rounded-full hover:opacity-90 hover:shadow-lg transition-all active:scale-95">
+        Hazte Socio
+      </a>
+      <!-- Hamburger mobile -->
+      <button id="btn-menu" class="md:hidden p-2 rounded-lg hover:bg-surface-container-low transition-colors" aria-label="Abrir menú">
+        <span class="material-symbols-outlined text-primary">menu</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-outline-variant/40">
+    <nav class="flex flex-col px-6 py-4 gap-4">
+      <a href="#inicio"   class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Inicio</a>
+      <a href="#nosotros" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Quiénes Somos</a>
+      <a href="#noticias" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Noticias</a>
+      <a href="#red"      class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Publicaciones</a>
+      <a href="#contacto" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Contacto</a>
+      <a href="#contacto" class="bg-secondary text-white text-center px-6 py-2.5 font-bold text-sm rounded-full mt-2">Hazte Socio</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════════════════════ -->
+<main id="inicio" class="mt-[64px] sm:mt-[72px]">
+
+  <!-- ── 1. HERO SLIDER ─────────────────────────────────────── -->
+  <section class="carousel-wrap" aria-label="Slider principal">
+
+    <!-- Slide 1 -->
+    <div class="carousel-slide active" id="slide-1">
+      <img
+        class="bg-photo"
+        src="img/hero-banner-1.jpg"
+        alt="Seminario institucional ICHDT"
+      />
+      <!-- img/hero-banner-1.jpg — IMAGEN LOCAL OK -->
+      <div class="absolute inset-0 bg-primary/45"></div>
+      <div class="relative z-10 w-full max-w-site mx-auto px-6 lg:px-20 text-center">
+        <div class="max-w-3xl mx-auto space-y-7">
+          <div class="inline-flex items-center gap-2 bg-secondary/20 text-secondary px-4 py-1.5 rounded-full">
+            <span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+            <span class="text-xs font-bold uppercase tracking-widest">Aniversario ICHDT</span>
+          </div>
+          <h1 class="text-white font-headline text-[1.75rem] leading-tight sm:text-4xl md:text-6xl lg:text-7xl">
+            <strong>65 años</strong> impulsando el Derecho Tributario en Chile
+          </h1>
+          <p class="text-blue-100 text-sm sm:text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+            Institución dedicada al estudio, análisis y difusión del Derecho Tributario.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2 px-4 sm:px-0">
+            <a href="#nosotros" class="bg-secondary text-white text-center px-7 py-3.5 font-bold text-sm rounded-full hover:shadow-[0_10px_24px_rgba(27,203,242,0.35)] transition-all hover:-translate-y-0.5">
+              Conoce el Instituto
+            </a>
+            <a href="#directorio" class="border-2 border-white/35 text-white text-center px-7 py-3.5 font-bold text-sm rounded-full hover:bg-white hover:text-primary transition-all hover:-translate-y-0.5">
+              Ver Directorio
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-slide" id="slide-2">
+      <img
+        class="bg-photo"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYpQ7-eYO-ulTe-YoEGbbee4M5qr33CXG8gWmI6xtEB5b-LEMYF21E330AmuXUbSOftZr09uX-_oOaTU-Wd7mJhFuYXR_ZcSzA5Nwyiti_VnLS4SHpv9CeeEGhkoQePGBwoMlkgRFik6-MjTuo57hUeRZDBwhedxu6I0THK_AzFB4NN0vWlxlB-ssOqoJtbJijhnXPZ2KJ70X7RReFZvi9Ki6sCP82592CdqPJXI2Jd7ZXFTanX5PTZsIXjhxaD4qYUK0ebEiV32Tz"
+        alt="Networking profesional Derecho Tributario"
+      />
+      <!-- TODO: reemplazar por: img/hero-banner-2.jpg -->
+      <div class="absolute inset-0 bg-primary/45"></div>
+      <div class="relative z-10 w-full max-w-site mx-auto px-6 lg:px-20 text-center">
+        <div class="max-w-3xl mx-auto space-y-7">
+          <div class="inline-flex items-center gap-2 bg-secondary/20 text-secondary px-4 py-1.5 rounded-full">
+            <span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+            <span class="text-xs font-bold uppercase tracking-widest">Nuestra Red</span>
+          </div>
+          <h1 class="text-white font-headline text-4xl md:text-6xl lg:text-7xl leading-[1.15]">
+            Conectamos especialistas en Derecho Tributario
+          </h1>
+          <p class="text-blue-100 text-sm sm:text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+            Accede a actividades, actualización profesional y una red académica de excelencia.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2 px-4 sm:px-0">
+            <a href="#contacto" class="bg-secondary text-white text-center px-7 py-3.5 font-bold text-sm rounded-full hover:shadow-[0_10px_24px_rgba(27,203,242,0.35)] transition-all hover:-translate-y-0.5">
+              Hazte Socio
+            </a>
+            <a href="#nosotros" class="border-2 border-white/35 text-white text-center px-7 py-3.5 font-bold text-sm rounded-full hover:bg-white hover:text-primary transition-all hover:-translate-y-0.5">
+              Conocer Más
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dots navegación -->
+    <div class="carousel-dots" role="tablist" aria-label="Controles del slider">
+      <button class="dot active" onclick="goToSlide(0)" aria-label="Slide 1" role="tab"></button>
+      <button class="dot"        onclick="goToSlide(1)" aria-label="Slide 2" role="tab"></button>
+    </div>
+  </section>
+
+  <!-- ── 2. MÉTRICAS / CONTADORES ───────────────────────────── -->
+  <section class="py-14 bg-surface border-b border-outline-variant/40" aria-label="Cifras del instituto">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-10 text-center divide-y md:divide-y-0 divide-outline-variant/40">
+
+        <div class="space-y-2 py-8 md:py-0">
+          <p class="font-headline text-5xl font-black text-primary">
+            <span class="counter-num" data-target="500" data-suffix="+">0</span>
+          </p>
+          <p class="text-xs font-bold uppercase tracking-[0.22em] text-on-surface-variant">Socios activos</p>
+        </div>
+
+        <div class="space-y-2 py-8 md:py-0 md:border-x border-outline-variant/50">
+          <p class="font-headline text-5xl font-black text-primary">
+            <span class="counter-num" data-target="50" data-suffix="+">0</span>
+          </p>
+          <p class="text-xs font-bold uppercase tracking-[0.22em] text-on-surface-variant">Eventos anuales</p>
+        </div>
+
+        <div class="space-y-2 py-8 md:py-0">
+          <p class="font-headline text-5xl font-black text-primary">
+            <span class="counter-num" data-target="65" data-suffix="">0</span>
+          </p>
+          <p class="text-xs font-bold uppercase tracking-[0.22em] text-on-surface-variant">Años de trayectoria</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. BENEFICIOS DE SER SOCIO ─────────────────────────── -->
+  <section id="nosotros" class="py-14 md:py-24 lg:py-32 bg-surface-container-low section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+
+      <!-- Intro columnas -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+        <div class="space-y-6">
+          <div>
+            <h2 class="font-headline text-2xl sm:text-3xl md:text-5xl font-bold text-primary">Beneficios de ser socio</h2>
+            <span class="title-bar"></span>
+          </div>
+          <p class="text-on-surface-variant text-lg font-light leading-relaxed">
+            Forma parte de una comunidad especializada y accede a espacios de actualización, formación y vinculación profesional.
+          </p>
+          <p class="text-on-surface-variant/70 text-base font-light leading-relaxed">
+            Nuestra red integra a los más destacados académicos y profesionales del país, fomentando un entorno de excelencia para el desarrollo del Derecho Tributario.
+          </p>
+        </div>
+        <div class="relative">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4uv9SIj1TmC7eClMtJgiKQ7Q-5gQWudIhjyqF5ing7pyUa-pmYstAMWzgZ8uEAE1LbzF0NVGvC7zLGL1fd2WCTNxRN_450TrWeZkfLtyeHxZA9hMA_pPPhxNDkrwRzJQxdk0GY_93vwxdP-JvhULK78SioOvd2Q8Woil4P75IJlgPkLgtjwFmCG2DkR2VyNyNyXtE7GQMOxytSi_3sMRIQg-W3QD4zsRAT9sLPo8jFBClE1v3dzjFIIcxKH6q-9hfh9tYWiJ-Hj4v"
+            alt="Reunión de abogados especialistas en derecho tributario"
+            class="rounded-2xl shadow-2xl w-full h-[400px] object-cover"
+          />
+          <!-- TODO: reemplazar por: img/beneficios-socios.jpg -->
+          <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-secondary/10 rounded-full -z-10"></div>
+        </div>
+      </div>
+
+      <!-- Grilla 6 tarjetas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-14">
+
+        <article class="bg-white p-6 sm:p-10 rounded-2xl card-shadow card-hover group border border-transparent hover:border-secondary/20">
+          <span class="material-symbols-outlined text-4xl text-secondary mb-5 block group-hover:scale-110 transition-transform">update</span>
+          <h3 class="font-headline text-xl font-bold text-primary mb-3">Actualización permanente</h3>
+          <p class="text-on-surface-variant leading-relaxed text-sm">Accede a contenidos, reformas y criterios relevantes del ámbito tributario.</p>
+        </article>
+
+        <article class="bg-white p-6 sm:p-10 rounded-2xl card-shadow card-hover group border border-transparent hover:border-secondary/20">
+          <span class="material-symbols-outlined text-4xl text-secondary mb-5 block group-hover:scale-110 transition-transform">hub</span>
+          <h3 class="font-headline text-xl font-bold text-primary mb-3">Networking profesional</h3>
+          <p class="text-on-surface-variant leading-relaxed text-sm">Conecta con especialistas, académicos y profesionales del área.</p>
+        </article>
+
+        <article class="bg-white p-6 sm:p-10 rounded-2xl card-shadow card-hover group border border-transparent hover:border-secondary/20">
+          <span class="material-symbols-outlined text-4xl text-secondary mb-5 block group-hover:scale-110 transition-transform">school</span>
+          <h3 class="font-headline text-xl font-bold text-primary mb-3">Capacitación continua</h3>
+          <p class="text-on-surface-variant leading-relaxed text-sm">Participa en charlas, seminarios y actividades formativas.</p>
+        </article>
+
+        <article class="bg-white p-6 sm:p-10 rounded-2xl card-shadow card-hover group border border-transparent hover:border-secondary/20">
+          <span class="material-symbols-outlined text-4xl text-secondary mb-5 block group-hover:scale-110 transition-transform">verified</span>
+          <h3 class="font-headline text-xl font-bold text-primary mb-3">Certificaciones</h3>
+          <p class="text-on-surface-variant leading-relaxed text-sm">Obtén certificados de participación en actividades del Instituto.</p>
+        </article>
+
+        <article class="bg-white p-6 sm:p-10 rounded-2xl card-shadow card-hover group border border-transparent hover:border-secondary/20">
+          <span class="material-symbols-outlined text-4xl text-secondary mb-5 block group-hover:scale-110 transition-transform">menu_book</span>
+          <h3 class="font-headline text-xl font-bold text-primary mb-3">Publicaciones y recursos</h3>
+          <p class="text-on-surface-variant leading-relaxed text-sm">Accede a artículos, documentos y material especializado.</p>
+        </article>
+
+        <article class="bg-white p-6 sm:p-10 rounded-2xl card-shadow card-hover group border border-transparent hover:border-secondary/20">
+          <span class="material-symbols-outlined text-4xl text-secondary mb-5 block group-hover:scale-110 transition-transform">account_balance</span>
+          <h3 class="font-headline text-xl font-bold text-primary mb-3">Desarrollo académico</h3>
+          <p class="text-on-surface-variant leading-relaxed text-sm">Accede a instancias de formación y actualización continua.</p>
+        </article>
+
+      </div>
+
+      <!-- CTA -->
+      <div class="flex justify-center">
+        <a href="#contacto" class="bg-secondary text-white px-12 py-4 font-bold rounded-full hover:shadow-xl transition-all hover:scale-105 text-sm">
+          Hazte socio
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 4. NOTICIAS Y ACTIVIDADES ──────────────────────────── -->
+  <section id="noticias" class="py-14 md:py-24 lg:py-32 bg-surface section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+
+      <!-- Cabecera sección -->
+      <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-16 gap-6">
+        <div>
+          <h2 class="font-headline text-2xl sm:text-3xl md:text-5xl font-bold text-primary">Noticias y actividades</h2>
+          <span class="title-bar"></span>
+          <p class="text-on-surface-variant text-lg font-light mt-4">Revisa las últimas publicaciones, seminarios y actividades del Instituto.</p>
+        </div>
+        <a href="#" class="flex items-center gap-2 text-secondary font-bold text-sm hover:gap-4 transition-all group shrink-0">
+          Ver todas las noticias
+          <span class="material-symbols-outlined text-xl">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Grid noticias -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Noticia 1 -->
+        <article class="flex flex-col bg-white rounded-2xl card-shadow overflow-hidden group">
+          <div class="h-56 overflow-hidden relative">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMhI15UzZBJ0gGheDv8N8XalS6tZbR6pMVoDhgTo1igXATZ49-01zyDVNj8NuuFSSC8ATi_YWgn_T-HOhZihAYkpyB9duM0SMCmsqb6c7sHYqYwc3rsgV8ERc2-mNRamzovgRe4brPFwaQTsewUFY4nKCbZZ6SMyyATxUwl9i6D1Etk3DZ0bmSVx5urkqvmYaVXtT2ZZckr7BpsrOUX8fO6c3yZq7v3-y0sd_MlJ2Jas2F3vCQ80ay9_rDqzp-9k1i58OLAyloMje2"
+              alt="65 años ICHDT"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <!-- TODO: reemplazar por: img/noticia-65-anios.jpg -->
+            <span class="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Institucional</span>
+          </div>
+          <div class="p-7 flex flex-col flex-1">
+            <time class="text-xs font-bold text-secondary uppercase tracking-widest mb-3">Enero 29, 2026</time>
+            <h3 class="font-headline text-xl font-bold text-primary mb-3 leading-snug group-hover:text-secondary transition-colors">
+              Celebramos 65 años de historia, dedicación y compromiso en el ICHDT
+            </h3>
+            <p class="text-on-surface-variant text-sm font-light line-clamp-3 mb-6 flex-1">
+              Una trayectoria impecable al servicio de la doctrina y el desarrollo del Derecho Tributario en nuestro país.
+            </p>
+            <a href="#" class="text-primary font-bold text-sm border-b-2 border-secondary pb-0.5 hover:border-primary transition-colors w-fit">Leer más</a>
+          </div>
+        </article>
+
+        <!-- Noticia 2 -->
+        <article class="flex flex-col bg-white rounded-2xl card-shadow overflow-hidden group">
+          <div class="h-56 overflow-hidden relative">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbfGngPQScQNsC8_EhAlIT_DlmuuVtM0T2_ti-pwPKe8lI3aEbgpEIFRxeEjy3EoAchgjN06unHWVYcA41KdHROoaTsHBc7uQ90Ut-eEzK7gqlaapvmHaPMluh57KQTKiIJPBdYpP69lkIi5TuUdQr35eJ6KkFDO_YN19YcQ7KyX98iZkuR7yqpmc2n8fuhA4YFQUs-eMRt9kiwyqb61z62Kiw-815Ir0LFBYrQP76JClUFf2T5PhozOysbeggfD4gjM4QOUm_JAXh"
+              alt="Memoria aniversario ICHDT"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <!-- TODO: reemplazar por: img/noticia-memoria.jpg -->
+            <span class="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Publicación</span>
+          </div>
+          <div class="p-7 flex flex-col flex-1">
+            <time class="text-xs font-bold text-secondary uppercase tracking-widest mb-3">Enero 06, 2026</time>
+            <h3 class="font-headline text-xl font-bold text-primary mb-3 leading-snug group-hover:text-secondary transition-colors">
+              La memoria del 65º Aniversario del ICHDT
+            </h3>
+            <p class="text-on-surface-variant text-sm font-light line-clamp-3 mb-6 flex-1">
+              Disponible para descarga la memoria anual que resume los hitos y logros de nuestra sexagésima quinta jornada.
+            </p>
+            <a href="#" class="text-primary font-bold text-sm border-b-2 border-secondary pb-0.5 hover:border-primary transition-colors w-fit">Leer más</a>
+          </div>
+        </article>
+
+        <!-- Noticia 3 -->
+        <article class="flex flex-col bg-white rounded-2xl card-shadow overflow-hidden group">
+          <div class="h-56 overflow-hidden relative">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ANe-5xOlOmQ-oEoSjF7BVeuGS2S_ioxfU_aitlgSBgY9ltq0msolC13AFJuhCDkJijdocsWAzJiwr6a_f1gPZ00kA5WJDcTNrAB7KSQhg4AOzTA6HGA9sCTiypSEEMN9mWOfxVBnlOENBI-1TLBh_p53byOiqI8TQe96ZNgXpzUcKdChwMUKle2dBsKv-vY1ArWOn7VTO1bk_OPpcjYNL9nYKE95vCx6CM1FNSoKgRAEUwkD9whNIp60L3bvMu3PadndwzvbPv0g"
+              alt="Foro Propuestas Tributarias"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <!-- TODO: reemplazar por: img/noticia-foro.jpg -->
+            <span class="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Foro</span>
+          </div>
+          <div class="p-7 flex flex-col flex-1">
+            <time class="text-xs font-bold text-secondary uppercase tracking-widest mb-3">Diciembre 05, 2025</time>
+            <h3 class="font-headline text-xl font-bold text-primary mb-3 leading-snug group-hover:text-secondary transition-colors">
+              Foro de Propuestas Programáticas en materia Tributaria
+            </h3>
+            <p class="text-on-surface-variant text-sm font-light line-clamp-3 mb-6 flex-1">
+              Análisis técnico de las visiones tributarias de cara a las elecciones presidenciales 2025.
+            </p>
+            <a href="#" class="text-primary font-bold text-sm border-b-2 border-secondary pb-0.5 hover:border-primary transition-colors w-fit">Leer más</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. EXPANDE TU RED PROFESIONAL ──────────────────────── -->
+  <section id="red" class="py-14 md:py-24 lg:py-32 bg-primary text-white relative overflow-hidden section-reveal">
+    <!-- Textura de fondo sutil -->
+    <div class="absolute inset-0 opacity-[0.04] pointer-events-none"
+         style="background-image: repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.3) 40px,rgba(255,255,255,0.3) 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,255,255,0.3) 40px,rgba(255,255,255,0.3) 41px);">
+    </div>
+
+    <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20">
+
+      <!-- Cabecera -->
+      <div class="text-center mb-16">
+        <h2 class="font-headline text-2xl sm:text-3xl md:text-5xl font-bold">Expande tu red profesional</h2>
+        <span class="title-bar mx-auto"></span>
+        <p class="text-blue-100 text-lg font-light leading-relaxed mt-6 max-w-2xl mx-auto">
+          Conecta con profesionales del área tributaria y participa en espacios de intercambio académico y profesional.
+        </p>
+      </div>
+
+      <!-- 4 bloques -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+
+        <div class="group text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 transition-all group-hover:bg-secondary">
+            <span class="material-symbols-outlined text-3xl text-primary group-hover:text-white">forum</span>
+          </div>
+          <h4 class="font-headline text-lg font-bold mb-3">Foros de discusión</h4>
+          <p class="text-blue-100 text-sm font-light leading-relaxed">Participa en conversaciones sobre temas tributarios actuales.</p>
+        </div>
+
+        <div class="group text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 transition-all group-hover:bg-secondary">
+            <span class="material-symbols-outlined text-3xl text-primary group-hover:text-white">group_work</span>
+          </div>
+          <h4 class="font-headline text-lg font-bold mb-3">Grupos de trabajo</h4>
+          <p class="text-blue-100 text-sm font-light leading-relaxed">Colabora en estudios, análisis y proyectos del Instituto.</p>
+        </div>
+
+        <div class="group text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 transition-all group-hover:bg-secondary">
+            <span class="material-symbols-outlined text-3xl text-primary group-hover:text-white">local_library</span>
+          </div>
+          <h4 class="font-headline text-lg font-bold mb-3">Biblioteca digital</h4>
+          <p class="text-blue-100 text-sm font-light leading-relaxed">Accede a publicaciones, artículos y recursos especializados.</p>
+        </div>
+
+        <div class="group text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 transition-all group-hover:bg-secondary">
+            <span class="material-symbols-outlined text-3xl text-primary group-hover:text-white">video_chat</span>
+          </div>
+          <h4 class="font-headline text-lg font-bold mb-3">Webinars exclusivos</h4>
+          <p class="text-blue-100 text-sm font-light leading-relaxed">Participa en encuentros online con especialistas nacionales e internacionales.</p>
+        </div>
+
+      </div>
+
+      <!-- CTA final -->
+      <div class="text-center">
+        <a href="#contacto" class="inline-block bg-secondary text-white px-12 py-4 font-bold rounded-full hover:shadow-2xl transition-all hover:scale-105 text-sm">
+          Únete a la comunidad
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 6. FORMULARIO DE CONTACTO ──────────────────────────── -->
+  <section id="contacto" class="py-14 md:py-24 lg:py-32 bg-surface section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+
+        <!-- Columna info -->
+        <div class="space-y-10">
+          <div>
+            <h2 class="font-headline text-2xl sm:text-3xl md:text-5xl font-bold text-primary">Contáctanos</h2>
+            <span class="title-bar"></span>
+            <p class="text-on-surface-variant text-lg font-light leading-relaxed mt-6">
+              Escríbenos si deseas obtener más información sobre el Instituto, sus actividades o el proceso de afiliación.
+            </p>
+          </div>
+
+          <div class="space-y-8">
+            <div class="flex items-center gap-5 group">
+              <div class="w-11 h-11 bg-primary/6 rounded-full flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all">
+                <span class="material-symbols-outlined text-lg">mail</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-secondary mb-1">Email</p>
+                <p class="text-lg font-bold text-primary">contacto@ichdt.cl</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-5 group">
+              <div class="w-11 h-11 bg-primary/6 rounded-full flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all">
+                <span class="material-symbols-outlined text-lg">call</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-secondary mb-1">Teléfono</p>
+                <p class="text-lg font-bold text-primary">+56 2 2234 5678</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-5 group">
+              <div class="w-11 h-11 bg-primary/6 rounded-full flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all">
+                <span class="material-symbols-outlined text-lg">location_on</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-secondary mb-1">Dirección</p>
+                <p class="text-lg font-bold text-primary leading-snug">Av. Apoquindo 1234, Las Condes, Santiago.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna formulario -->
+        <div class="bg-surface-container-low p-6 sm:p-10 rounded-3xl border border-outline-variant/30">
+
+          <!-- Mensaje éxito (oculto por defecto) -->
+          <div id="form-success" class="hidden mb-6 bg-green-50 border border-green-200 text-green-800 px-5 py-4 rounded-xl text-sm font-semibold flex items-center gap-3">
+            <span class="material-symbols-outlined text-green-600 text-xl">check_circle</span>
+            Tu mensaje ha sido enviado correctamente.
+          </div>
+
+          <form id="contact-form" novalidate class="space-y-6">
+
+            <div class="space-y-1.5">
+              <label for="name" class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Nombre completo <span class="text-red-400">*</span></label>
+              <input
+                id="name" name="name" type="text"
+                placeholder="Juan Pérez"
+                class="w-full bg-white border border-outline-variant rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all placeholder:text-on-surface-variant/35"
+              />
+              <p class="field-error hidden text-xs text-red-500 mt-1">Este campo es requerido.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="space-y-1.5">
+                <label for="email" class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Correo electrónico <span class="text-red-400">*</span></label>
+                <input
+                  id="email" name="email" type="email"
+                  placeholder="juan@ejemplo.cl"
+                  class="w-full bg-white border border-outline-variant rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all placeholder:text-on-surface-variant/35"
+                />
+                <p class="field-error hidden text-xs text-red-500 mt-1">Ingresa un email válido.</p>
+              </div>
+              <div class="space-y-1.5">
+                <label for="phone" class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Teléfono</label>
+                <input
+                  id="phone" name="phone" type="tel"
+                  placeholder="+56 9 1234 5678"
+                  class="w-full bg-white border border-outline-variant rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all placeholder:text-on-surface-variant/35"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="message" class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Mensaje <span class="text-red-400">*</span></label>
+              <textarea
+                id="message" name="message"
+                placeholder="¿En qué podemos ayudarte?"
+                rows="5"
+                class="w-full bg-white border border-outline-variant rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all placeholder:text-on-surface-variant/35 resize-none"
+              ></textarea>
+              <p class="field-error hidden text-xs text-red-500 mt-1">Este campo es requerido.</p>
+            </div>
+
+            <button type="submit" class="w-full bg-secondary text-white py-4 font-bold rounded-full hover:opacity-90 hover:shadow-lg transition-all active:scale-[0.98] text-sm tracking-wide">
+              Enviar mensaje
+            </button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════ -->
+<footer id="site-footer" class="bg-primary text-white pt-12 md:pt-20 pb-8 overflow-hidden relative">
+
+  <!-- Decoración -->
+  <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20">
+
+    <!-- Grid 4 columnas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+
+      <!-- Col 1: Marca -->
+      <div class="space-y-6 lg:col-span-1">
+        <img
+          src="img/logo-ichdt.png"
+          alt="Instituto Chileno de Derecho Tributario"
+          class="h-16 w-auto object-contain brightness-0 invert"
+        />
+        <p class="text-blue-200/80 font-light text-sm leading-relaxed">
+          Instituto Chileno de Derecho Tributario<br/>
+          65 años promoviendo el estudio y desarrollo del Derecho Tributario en Chile.
+        </p>
+      </div>
+
+      <!-- Col 2: Menú rápido -->
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Menú rápido</h4>
+        <ul class="space-y-3">
+          <li><a href="#inicio"   class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Inicio</a></li>
+          <li><a href="#nosotros" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Quiénes Somos</a></li>
+          <li><a href="#noticias" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Noticias</a></li>
+          <li><a href="#contacto" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Hazte Socio</a></li>
+          <li><a href="#contacto" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Contacto -->
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Contacto</h4>
+        <ul class="space-y-4 text-blue-200/70 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">location_on</span>
+            Av. Apoquindo 1234, Las Condes, Santiago
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0">mail</span>
+            contacto@ichdt.cl
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0">call</span>
+            +56 2 2234 5678
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Redes -->
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Síguenos</h4>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">link</span>
+          </a>
+          <a href="#" aria-label="Twitter/X" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">share</span>
+          </a>
+          <a href="#" aria-label="YouTube" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">play_circle</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Línea divisoria + copyright -->
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-blue-200/40 text-[11px] font-bold uppercase tracking-widest">
+        © 2026 Instituto Chileno de Derecho Tributario. Todos los derechos reservados.
+      </p>
+      <div class="flex gap-5 text-[11px] font-bold text-blue-200/40 uppercase tracking-widest">
+        <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
+        <span>|</span>
+        <a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ── Botón volver arriba ──────────────────────────────────── -->
+<button
+  id="btn-top"
+  onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-8 right-8 z-50 bg-secondary text-white w-13 h-13 w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all focus:outline-none"
+  aria-label="Volver al inicio"
+>
+  <span class="material-symbols-outlined text-2xl">arrow_upward</span>
+</button>
+
+<!-- ════════════════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════════════ -->
+<script>
+  /* ── Scroll reveal ─────────────────────────────────────────── */
+  const revealObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.section-reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── Botón volver arriba ────────────────────────────────────── */
+  const btnTop = document.getElementById('btn-top');
+  window.addEventListener('scroll', () => {
+    btnTop.classList.toggle('visible', window.scrollY > 320);
+  });
+
+  /* ── Header sombra al hacer scroll ─────────────────────────── */
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.style.boxShadow = window.scrollY > 10
+      ? '0 4px 20px -2px rgba(0,0,0,0.08)'
+      : 'none';
+  });
+
+  /* ── Menú mobile ────────────────────────────────────────────── */
+  const btnMenu   = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+
+  /* ── Hero carousel ──────────────────────────────────────────── */
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots   = document.querySelectorAll('.dot');
+
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  let autoSlide = setInterval(() => goToSlide(currentSlide + 1), 5500);
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      clearInterval(autoSlide);
+      goToSlide(i);
+      autoSlide = setInterval(() => goToSlide(currentSlide + 1), 5500);
+    });
+  });
+
+  /* ── Count-up animado ───────────────────────────────────────── */
+  const counters = document.querySelectorAll('.counter-num');
+  let counted = false;
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      counters.forEach(el => {
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const step = 16;
+        const increment = target / (duration / step);
+        let current = 0;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = Math.floor(current) + suffix;
+        }, step);
+      });
+    }
+  }, { threshold: 0.5 });
+
+  if (counters.length) counterObserver.observe(counters[0].closest('section'));
+
+  /* ── Validación formulario ──────────────────────────────────── */
+  const form = document.getElementById('contact-form');
+  const successMsg = document.getElementById('form-success');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+
+    // Limpiar errores previos
+    form.querySelectorAll('.field-error').forEach(el => el.classList.add('hidden'));
+    form.querySelectorAll('input, textarea').forEach(el => el.classList.remove('border-red-400'));
+
+    // Validar nombre
+    const name = form.querySelector('#name');
+    if (!name.value.trim()) {
+      showError(name); valid = false;
+    }
+
+    // Validar email
+    const email = form.querySelector('#email');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim() || !emailRegex.test(email.value)) {
+      showError(email); valid = false;
+    }
+
+    // Validar mensaje
+    const message = form.querySelector('#message');
+    if (!message.value.trim()) {
+      showError(message); valid = false;
+    }
+
+    if (valid) {
+      form.reset();
+      successMsg.classList.remove('hidden');
+      setTimeout(() => successMsg.classList.add('hidden'), 5000);
+    }
+  });
+
+  function showError(field) {
+    field.classList.add('border-red-400');
+    const err = field.closest('.space-y-1\\.5')?.querySelector('.field-error');
+    if (err) err.classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>
