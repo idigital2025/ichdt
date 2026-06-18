@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Quiénes Somos — Instituto Chileno de Derecho Tributario, 65 años promoviendo el estudio y desarrollo del Derecho Tributario en Chile." />
+  <title>Quiénes Somos — ICHDT</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary":                "#044D8C",
+            "secondary":              "#1BCBF2",
+            "background":             "#FDFDFD",
+            "surface":                "#FFFFFF",
+            "on-surface":             "#1A1C1E",
+            "on-surface-variant":     "#44474E",
+            "outline-variant":        "#E1E2E8",
+            "surface-container-low":  "#F7F9FC",
+          },
+          fontFamily: {
+            "headline": ["Libre Caslon Text", "serif"],
+            "body":     ["Open Sans", "sans-serif"],
+          },
+          maxWidth: {
+            "site": "1280px",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ─── Material Icons ─────────────────────────────────────── */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ─── Scroll reveal ──────────────────────────────────────── */
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Nav underline hover ────────────────────────────────── */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 2px;
+      bottom: -4px; left: 0;
+      background-color: #044D8C;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── Decoración línea bajo títulos ──────────────────────── */
+    .title-bar {
+      display: block;
+      width: 72px; height: 3px;
+      background-color: #1BCBF2;
+      border-radius: 99px;
+      margin-top: 14px;
+    }
+
+    /* ─── Sombra suave en tarjetas ───────────────────────────── */
+    .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); }
+    .card-hover {
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px -10px rgba(0,0,0,0.12);
+    }
+
+    /* ─── Scroll to top ──────────────────────────────────────── */
+    #btn-top {
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #btn-top.visible { opacity: 1; visibility: visible; }
+
+    /* ─── Métricas count-up ──────────────────────────────────── */
+    .counter-num {
+      display: inline-block;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── Mobile menu ────────────────────────────────────────── */
+    #mobile-menu {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    #mobile-menu.open { max-height: 400px; }
+
+    /* ─── Hero interno ───────────────────────────────────────── */
+    .page-hero {
+      min-height: 420px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    /* ─── Alfabeto filtro ────────────────────────────────────── */
+    .alpha-btn {
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #44474E;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid #E1E2E8;
+      background: white;
+    }
+    .alpha-btn:hover,
+    .alpha-btn.active {
+      background: #044D8C;
+      color: white;
+      border-color: #044D8C;
+    }
+
+    /* ─── Card persona ───────────────────────────────────────── */
+    .person-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .person-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px -8px rgba(4,77,140,0.14);
+    }
+
+    /* ─── Foto rectangular (Opción A) ───────────────────────── */
+    .card-photo {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      background: #EEF4FB;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .card-photo .photo-fallback {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #DCE8F5 0%, #EEF4FB 100%);
+    }
+
+    /* ─── Avatar genérico (ícono, mismo ratio) ───────────────── */
+    .avatar-generic {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(160deg, #DCE8F5 0%, #EEF4FB 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ─── Avatar pequeño (socios activos) ───────────────────── */
+    .avatar-sm {
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(160deg, #DCE8F5 0%, #EEF4FB 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ─── Botón ícono social ─────────────────────────────────── */
+    .icon-social {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: rgba(4,77,140,0.06);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #044D8C;
+      transition: background 0.2s ease, color 0.2s ease;
+      flex-shrink: 0;
+    }
+    .icon-social:hover { background: #1BCBF2; color: #fff; }
+
+    /* ─── Ícono LinkedIn SVG ─────────────────────────────────── */
+    .li-icon { display: block; width: 13px; height: 13px; fill: currentColor; }
+
+    /* ─── Próximamente badge ─────────────────────────────────── */
+    .coming-soon-card {
+      border: 2px dashed #E1E2E8;
+      background: #FAFBFC;
+    }
+
+    /* ─── Parallax sutil hero ────────────────────────────────── */
+    .hero-bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-secondary/30">
+
+<!-- ════════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════ -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 bg-white border-b border-outline-variant/50 transition-shadow duration-300">
+  <div class="max-w-site mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-20 py-3">
+
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center shrink-0">
+      <img
+        src="img/logo-ichdt.png"
+        alt="Instituto Chileno de Derecho Tributario"
+        class="h-10 sm:h-14 w-auto object-contain"
+      />
+    </a>
+
+    <!-- Nav Desktop -->
+    <nav class="hidden md:flex gap-8 items-center">
+      <a href="index.html"       class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Inicio</a>
+      <a href="quienes-somos.html" class="nav-link text-primary font-bold text-sm tracking-wide">Quiénes Somos</a>
+      <a href="index.html#noticias" class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Noticias</a>
+      <a href="index.html#red"   class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Publicaciones</a>
+      <a href="index.html#contacto" class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Contacto</a>
+    </nav>
+
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-4">
+      <a href="index.html#contacto" class="hidden md:inline-flex bg-secondary text-white px-7 py-2.5 font-bold text-sm rounded-full hover:opacity-90 hover:shadow-lg transition-all active:scale-95">
+        Hazte Socio
+      </a>
+      <button id="btn-menu" class="md:hidden p-2 rounded-lg hover:bg-surface-container-low transition-colors" aria-label="Abrir menú">
+        <span class="material-symbols-outlined text-primary">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-outline-variant/40">
+    <nav class="flex flex-col px-6 py-4 gap-4">
+      <a href="index.html"         class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Inicio</a>
+      <a href="quienes-somos.html" class="font-semibold text-sm text-primary py-1">Quiénes Somos</a>
+      <a href="index.html#noticias" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Noticias</a>
+      <a href="index.html#red"     class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Publicaciones</a>
+      <a href="index.html#contacto" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Contacto</a>
+      <a href="index.html#contacto" class="bg-secondary text-white text-center px-6 py-2.5 font-bold text-sm rounded-full mt-2">Hazte Socio</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════════════════════ -->
+<main class="mt-[64px] sm:mt-[72px]">
+
+  <!-- ── 1. HERO ─────────────────────────────────────────────── -->
+  <section class="page-hero bg-primary overflow-hidden" aria-label="Hero Quiénes Somos">
+    <!-- Imagen de fondo -->
+    <img
+      src="img/hero-quienes-somos.jpg"
+      alt="Ambiente jurídico institucional ICHDT"
+      class="hero-bg-img"
+      onerror="this.style.display='none'"
+    />
+    <!-- Overlay degradado -->
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/75 to-primary/40"></div>
+
+    <div class="relative z-10 w-full max-w-site mx-auto px-6 lg:px-20 py-20">
+      <div class="max-w-2xl space-y-5">
+
+        <!-- Pretítulo -->
+        <div class="inline-flex items-center gap-2 bg-secondary/20 text-secondary px-4 py-1.5 rounded-full">
+          <span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+          <span class="text-xs font-black uppercase tracking-widest">Quiénes Somos</span>
+        </div>
+
+        <!-- H1 -->
+        <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
+          Bienvenidos a ICHDT
+        </h1>
+
+        <!-- Subtítulo -->
+        <p class="text-blue-100 text-lg sm:text-xl md:text-2xl font-light leading-relaxed">
+          Instituto Chileno de Derecho Tributario
+        </p>
+
+        <span class="title-bar"></span>
+
+        <!-- Anclas rápidas -->
+        <div class="flex flex-wrap gap-3 pt-4">
+          <a href="#historia"           class="border border-white/30 text-white/90 hover:bg-white hover:text-primary text-xs font-bold px-4 py-2 rounded-full transition-all">Historia</a>
+          <a href="#objetivos"          class="border border-white/30 text-white/90 hover:bg-white hover:text-primary text-xs font-bold px-4 py-2 rounded-full transition-all">Objetivos</a>
+          <a href="#directorio"         class="border border-white/30 text-white/90 hover:bg-white hover:text-primary text-xs font-bold px-4 py-2 rounded-full transition-all">Directorio</a>
+          <a href="#socios-honorarios"  class="border border-white/30 text-white/90 hover:bg-white hover:text-primary text-xs font-bold px-4 py-2 rounded-full transition-all">Socios Honorarios</a>
+          <a href="#socios-activos"     class="border border-white/30 text-white/90 hover:bg-white hover:text-primary text-xs font-bold px-4 py-2 rounded-full transition-all">Socios Activos</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Ola decorativa inferior -->
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-12 md:h-16">
+        <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FDFDFD"/>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ── 2. HISTORIA ───────────────────────────────────────────── -->
+  <section id="historia" class="py-14 md:py-24 bg-background section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+
+        <!-- Columna título -->
+        <div class="lg:col-span-4 lg:sticky lg:top-28">
+          <p class="text-xs font-black uppercase tracking-widest text-secondary mb-3">Fundación 1960</p>
+          <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-primary leading-tight">Historia</h2>
+          <span class="title-bar"></span>
+          <p class="text-on-surface-variant/70 text-sm font-light leading-relaxed mt-6">
+            Una trayectoria de más de seis décadas al servicio del Derecho Tributario en Chile.
+          </p>
+
+          <!-- Hito visual -->
+          <div class="mt-10 bg-primary rounded-2xl p-6 text-white space-y-1">
+            <p class="text-xs font-black uppercase tracking-widest text-secondary">Fundación</p>
+            <p class="font-headline text-3xl font-bold">19 Dic. 1960</p>
+            <p class="text-blue-200/80 text-sm font-light">Escritura pública ante Notario Herman Chadwick Valdés</p>
+          </div>
+        </div>
+
+        <!-- Columna texto -->
+        <div class="lg:col-span-8 space-y-6 text-on-surface-variant text-base md:text-lg font-light leading-relaxed">
+          <p>
+            Presentamos a continuación una breve historia del Instituto Chileno de Derecho Tributario que permita a los nuevos socios comprender y evaluar mejor el contexto de las actividades realizadas por el Instituto Chileno de Derecho Tributario.
+          </p>
+          <p>
+            El Instituto Chileno de Derecho Tributario fue fundado el <strong class="text-on-surface font-semibold">19 de Diciembre de 1960</strong>, por un selecto grupo de destacados profesores, abogados y profesionales dedicados a la tributación. Los respectivos estatutos fueron reducidos a escritura pública en la fecha indicada ante el Notario Público de Santiago don <strong class="text-on-surface font-semibold">Herman Chadwick Valdés</strong> y su personalidad jurídica fue concedida mediante <strong class="text-on-surface font-semibold">Decreto 599, de 3 de Febrero de 1961</strong>, publicado en el Diario Oficial de 17 del mismo mes y año.
+          </p>
+          <p>
+            El Instituto permaneció inactivo por varios decenios, excepto por un muy pequeño grupo de tributaristas que mantuvo vínculos con la <strong class="text-on-surface font-semibold">Asociación Fiscal Internacional (IFA)</strong> y con el <strong class="text-on-surface font-semibold">Instituto Latinoamericano de Derecho Tributario</strong>, asistiendo a Congresos y Jornadas organizados por tales instituciones.
+          </p>
+          <p>
+            Dentro del ese pequeño grupo, nació la idea y el interés por reiniciar las actividades del Instituto. Es así como se procedió a designar un Consejo Directivo, en adelante el "Consejo".
+          </p>
+          <p>
+            Una de las primeras tareas emprendidas por el Consejo fue invitar a integrarse al Instituto, en el carácter de campaña de socios, a profesores de la disciplina en las distintas facultades universitarias, a colegas de la administración financiera y tributaria, abogados y profesionales de otras disciplinas.
+          </p>
+          <p>
+            Se obtuvo la vigencia de la personalidad jurídica del Instituto, mediante el <strong class="text-on-surface font-semibold">Certificado de Vigencia, de 27 de noviembre de 2002</strong>, el Ministerio de Justicia dejó constancia de la vigencia del Instituto Chileno de Derecho Tributario.
+          </p>
+          <p>
+            El Consejo Directivo acordó citar a Asamblea General Extraordinaria de Socios con el objeto de reformar sus actuales estatutos, a fin de adecuarlos al Reglamento sobre Concesión de Personalidad Jurídica, contenido en el <strong class="text-on-surface font-semibold">Decreto N° 110, de 17 de Enero de 1979</strong>, del Ministerio de Justicia y, al mismo tiempo, dar mayor agilidad a la operación del Instituto.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 3. OBJETIVOS ──────────────────────────────────────────── -->
+  <section id="objetivos" class="py-14 md:py-24 bg-surface-container-low section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+
+        <!-- Columna título -->
+        <div class="lg:col-span-4 lg:sticky lg:top-28">
+          <p class="text-xs font-black uppercase tracking-widest text-secondary mb-3">Misión institucional</p>
+          <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-primary leading-tight">Objetivos</h2>
+          <span class="title-bar"></span>
+        </div>
+
+        <!-- Columna texto -->
+        <div class="lg:col-span-8 space-y-8">
+
+          <!-- Texto objetivos -->
+          <div class="space-y-5 text-on-surface-variant text-base md:text-lg font-light leading-relaxed">
+            <p>
+              De acuerdo a sus estatutos, el Instituto es una <strong class="text-on-surface font-semibold">entidad de carácter científico e independiente</strong>, cuyo objeto es realizar estudios e investigación destinados al <strong class="text-on-surface font-semibold">perfeccionamiento del Derecho Tributario Nacional</strong>. Para lograr dicho objetivo, el Instituto realizará, entre otras, las siguientes actividades.
+            </p>
+          </div>
+
+          <!-- Íconos de valores (decorativo) -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-5 pt-2">
+            <div class="flex items-start gap-3 bg-white rounded-xl p-4 card-shadow">
+              <span class="material-symbols-outlined text-secondary text-2xl shrink-0">science</span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-wide text-primary">Científico</p>
+                <p class="text-xs text-on-surface-variant/70 font-light mt-0.5">Rigor académico e investigativo</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white rounded-xl p-4 card-shadow">
+              <span class="material-symbols-outlined text-secondary text-2xl shrink-0">balance</span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-wide text-primary">Independiente</p>
+                <p class="text-xs text-on-surface-variant/70 font-light mt-0.5">Autonomía técnica e institucional</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white rounded-xl p-4 card-shadow">
+              <span class="material-symbols-outlined text-secondary text-2xl shrink-0">auto_stories</span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-wide text-primary">Perfeccionamiento</p>
+                <p class="text-xs text-on-surface-variant/70 font-light mt-0.5">Desarrollo continuo del Derecho</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 4. DIRECTORIO ─────────────────────────────────────────── -->
+  <section id="directorio" class="py-14 md:py-24 bg-primary section-reveal">
+    <!-- Textura sutil -->
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none"
+         style="background-image: repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(255,255,255,0.4) 30px,rgba(255,255,255,0.4) 31px);">
+    </div>
+
+    <div class="relative z-10 max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+
+      <!-- Cabecera -->
+      <div class="text-center mb-14">
+        <p class="text-xs font-black uppercase tracking-widest text-secondary mb-3">Gobierno Institucional</p>
+        <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-white">Directorio</h2>
+        <span class="title-bar mx-auto"></span>
+        <p class="text-blue-100/80 text-base md:text-lg font-light mt-5 max-w-xl mx-auto">
+          El Instituto es dirigido por el siguiente Consejo Directivo:
+        </p>
+      </div>
+
+      <!-- Grid único: 7 directores al mismo tamaño -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow">
+          <div class="card-photo">
+            <img src="https://ichdt.cl/download/index/imagenusuario/id/45/key/6c8349cc7260ae62e3b1396831a8398f" alt="Yuri Varela"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="photo-fallback" style="display:none">
+              <span class="material-symbols-outlined text-on-surface-variant/25" style="font-size:64px">person</span>
+            </div>
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Yuri Varela</h3>
+            <p class="text-secondary text-[10px] font-black uppercase tracking-widest mt-1 mb-3">Presidente / Director</p>
+            <div class="flex justify-center gap-2">
+              <a href="#" aria-label="LinkedIn Yuri Varela" class="icon-social">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+              </a>
+              <a href="mailto:yuri@voma.cl" aria-label="Email Yuri Varela" class="icon-social">
+                <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow">
+          <div class="card-photo">
+            <img src="https://ichdt.cl/download/index/imagenusuario/id/43/key/17e62166fc8586dfa4d1bc0e1742c08b" alt="Juan Pablo Cabello"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="photo-fallback" style="display:none">
+              <span class="material-symbols-outlined text-on-surface-variant/25" style="font-size:64px">person</span>
+            </div>
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Juan Pablo Cabello</h3>
+            <p class="text-secondary text-[10px] font-black uppercase tracking-widest mt-1 mb-3">Vicepresidente / Director</p>
+            <div class="flex justify-center gap-2">
+              <a href="#" aria-label="LinkedIn Juan Pablo Cabello" class="icon-social">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+              </a>
+              <a href="mailto:juan.cabello@cabelloabogados.cl" aria-label="Email Juan Pablo Cabello" class="icon-social">
+                <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow">
+          <div class="card-photo">
+            <img src="https://ichdt.cl/download/index/imagenusuario/id/46/key/d9d4f495e875a2e075a1a4a6e1b9770f" alt="Mario Cayupán Epul"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="photo-fallback" style="display:none">
+              <span class="material-symbols-outlined text-on-surface-variant/25" style="font-size:64px">person</span>
+            </div>
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Mario Cayupán Epul</h3>
+            <p class="text-secondary text-[10px] font-black uppercase tracking-widest mt-1 mb-3">Tesorero / Director</p>
+            <div class="flex justify-center gap-2">
+              <a href="#" aria-label="LinkedIn Mario Cayupán" class="icon-social">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+              </a>
+              <a href="mailto:mario.cayupan@auren.cl" aria-label="Email Mario Cayupán" class="icon-social">
+                <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow">
+          <div class="card-photo">
+            <img src="https://ichdt.cl/download/index/imagenusuario/id/47/key/67c6a1e7ce56d3d6fa748ab6d9af3fd7" alt="Jazmín Gajardo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="photo-fallback" style="display:none">
+              <span class="material-symbols-outlined text-on-surface-variant/25" style="font-size:64px">person</span>
+            </div>
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Jazmín Gajardo</h3>
+            <p class="text-secondary text-[10px] font-black uppercase tracking-widest mt-1 mb-3">Secretaria / Directora</p>
+            <div class="flex justify-center gap-2">
+              <a href="#" aria-label="LinkedIn Jazmín Gajardo" class="icon-social">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+              </a>
+              <a href="mailto:jgajardo@b2sg.cl" aria-label="Email Jazmín Gajardo" class="icon-social">
+                <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow">
+          <div class="card-photo">
+            <img src="https://ichdt.cl/download/index/imagenusuario/id/23/key/37693cfc748049e45d87b8c7d8b9aacd" alt="Ximena Niño"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="photo-fallback" style="display:none">
+              <span class="material-symbols-outlined text-on-surface-variant/25" style="font-size:64px">person</span>
+            </div>
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Ximena Niño</h3>
+            <p class="text-secondary text-[10px] font-black uppercase tracking-widest mt-1 mb-3">Directora</p>
+            <div class="flex justify-center gap-2">
+              <a href="#" aria-label="LinkedIn Ximena Niño" class="icon-social">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+              </a>
+              <a href="mailto:xnino@deloitte.com" aria-label="Email Ximena Niño" class="icon-social">
+                <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow">
+          <div class="card-photo">
+            <img src="https://ichdt.cl/download/index/imagenusuario/id/24/key/1ff1de774005f8da13f42943881c655f" alt="María Celeste Angulo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="photo-fallback" style="display:none">
+              <span class="material-symbols-outlined text-on-surface-variant/25" style="font-size:64px">person</span>
+            </div>
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">María Celeste Angulo</h3>
+            <p class="text-secondary text-[10px] font-black uppercase tracking-widest mt-1 mb-3">Directora</p>
+            <div class="flex justify-center gap-2">
+              <a href="#" aria-label="LinkedIn María Celeste Angulo" class="icon-social">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+              </a>
+              <a href="mailto:celesteangulo@zcabogados.cl" aria-label="Email María Celeste Angulo" class="icon-social">
+                <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow">
+          <div class="card-photo">
+            <img src="https://ichdt.cl/download/index/imagenusuario/id/48/key/642e92efb79421734881b53e1e1b18b6" alt="Amory Heine"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="photo-fallback" style="display:none">
+              <span class="material-symbols-outlined text-on-surface-variant/25" style="font-size:64px">person</span>
+            </div>
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Amory Heine</h3>
+            <p class="text-secondary text-[10px] font-black uppercase tracking-widest mt-1 mb-3">Directora</p>
+            <div class="flex justify-center gap-2">
+              <a href="#" aria-label="LinkedIn Amory Heine" class="icon-social">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+              </a>
+              <a href="mailto:amory.heine@us.dlapiper.com" aria-label="Email Amory Heine" class="icon-social">
+                <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 5. SOCIOS HONORARIOS ──────────────────────────────────── -->
+  <section id="socios-honorarios" class="py-14 md:py-24 bg-background section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+
+      <!-- Cabecera -->
+      <div class="mb-12">
+        <p class="text-xs font-black uppercase tracking-widest text-secondary mb-3">Distinción institucional</p>
+        <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-primary">Socios Honorarios</h2>
+        <span class="title-bar"></span>
+        <p class="text-on-surface-variant text-base md:text-lg font-light mt-5 max-w-2xl">
+          Profesionales que, por su trayectoria y aporte al Instituto, han sido distinguidos como Socios Honorarios.
+        </p>
+      </div>
+
+      <!-- Grid socios honorarios -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5" id="grid-honorarios">
+
+        <!-- Macro card honorario reutilizable: avatar-generic + nombre + cargo opcional + íconos -->
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow border border-outline-variant/30">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-primary/25" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Guido Aguirre De la Rivera</h3>
+            <div class="flex justify-center gap-2 mt-3">
+              <a href="#" aria-label="LinkedIn" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" aria-label="Email" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow border border-outline-variant/30">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-primary/25" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Juan Manuel Baraona Sainz</h3>
+            <p class="text-[10px] text-secondary font-black uppercase tracking-widest mt-1">Abogado</p>
+            <div class="flex justify-center gap-2 mt-3">
+              <a href="#" aria-label="LinkedIn" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" aria-label="Email" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow border border-outline-variant/30">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-primary/25" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Edgardo Boeninger</h3>
+            <div class="flex justify-center gap-2 mt-3">
+              <a href="#" aria-label="LinkedIn" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" aria-label="Email" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow border border-outline-variant/30">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-primary/25" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Milka Casanegra</h3>
+            <div class="flex justify-center gap-2 mt-3">
+              <a href="#" aria-label="LinkedIn" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" aria-label="Email" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow border border-outline-variant/30">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-primary/25" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Arnolfo Composto Canales</h3>
+            <div class="flex justify-center gap-2 mt-3">
+              <a href="#" aria-label="LinkedIn" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" aria-label="Email" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow border border-outline-variant/30">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-primary/25" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Hugo Daudet Proust</h3>
+            <div class="flex justify-center gap-2 mt-3">
+              <a href="#" aria-label="LinkedIn" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" aria-label="Email" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow border border-outline-variant/30">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-primary/25" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Pedro Massone Parodi</h3>
+            <div class="flex justify-center gap-2 mt-3">
+              <a href="#" aria-label="LinkedIn" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" aria-label="Email" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden person-card card-shadow border border-outline-variant/30">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-primary/25" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <h3 class="font-headline text-sm font-bold text-primary leading-snug">Enrique Silva Cimma</h3>
+            <div class="flex justify-center gap-2 mt-3">
+              <a href="#" aria-label="LinkedIn" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" aria-label="Email" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 6. COMITÉS TÉCNICOS ───────────────────────────────────── -->
+  <section id="comites" class="py-14 md:py-24 bg-surface-container-low section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+
+      <!-- Cabecera -->
+      <div class="mb-12">
+        <p class="text-xs font-black uppercase tracking-widest text-secondary mb-3">Trabajo especializado</p>
+        <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-primary">Comités Técnicos</h2>
+        <span class="title-bar"></span>
+        <p class="text-on-surface-variant text-base md:text-lg font-light mt-5 max-w-2xl">
+          El trabajo técnico del Instituto se organiza a través de comités especializados, integrados por socios con experiencia en distintas áreas del Derecho Tributario.
+        </p>
+      </div>
+
+      <!-- Estado "Próximamente" -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+
+        <div class="coming-soon-card rounded-2xl overflow-hidden opacity-60">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-on-surface-variant/20" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <div class="space-y-1.5 mb-3">
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-4/5 mx-auto"></div>
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-3/5 mx-auto"></div>
+            </div>
+            <span class="inline-block text-[10px] font-black uppercase tracking-widest text-secondary/60 bg-secondary/8 px-2 py-0.5 rounded-full">Próximamente</span>
+          </div>
+        </div>
+
+        <div class="coming-soon-card rounded-2xl overflow-hidden opacity-60">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-on-surface-variant/20" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <div class="space-y-1.5 mb-3">
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-4/5 mx-auto"></div>
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-3/5 mx-auto"></div>
+            </div>
+            <span class="inline-block text-[10px] font-black uppercase tracking-widest text-secondary/60 bg-secondary/8 px-2 py-0.5 rounded-full">Próximamente</span>
+          </div>
+        </div>
+
+        <div class="coming-soon-card rounded-2xl overflow-hidden opacity-60">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-on-surface-variant/20" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <div class="space-y-1.5 mb-3">
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-4/5 mx-auto"></div>
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-3/5 mx-auto"></div>
+            </div>
+            <span class="inline-block text-[10px] font-black uppercase tracking-widest text-secondary/60 bg-secondary/8 px-2 py-0.5 rounded-full">Próximamente</span>
+          </div>
+        </div>
+
+        <div class="coming-soon-card rounded-2xl overflow-hidden opacity-60">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-on-surface-variant/20" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <div class="space-y-1.5 mb-3">
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-4/5 mx-auto"></div>
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-3/5 mx-auto"></div>
+            </div>
+            <span class="inline-block text-[10px] font-black uppercase tracking-widest text-secondary/60 bg-secondary/8 px-2 py-0.5 rounded-full">Próximamente</span>
+          </div>
+        </div>
+
+        <div class="coming-soon-card rounded-2xl overflow-hidden opacity-60">
+          <div class="avatar-generic"><span class="material-symbols-outlined text-on-surface-variant/20" style="font-size:52px">person</span></div>
+          <div class="p-4 text-center">
+            <div class="space-y-1.5 mb-3">
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-4/5 mx-auto"></div>
+              <div class="h-3 bg-on-surface-variant/10 rounded-full w-3/5 mx-auto"></div>
+            </div>
+            <span class="inline-block text-[10px] font-black uppercase tracking-widest text-secondary/60 bg-secondary/8 px-2 py-0.5 rounded-full">Próximamente</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="text-center text-xs text-on-surface-variant/40 font-semibold mt-8">
+        Los integrantes de los comités técnicos serán publicados próximamente.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ── 7. SOCIOS ACTIVOS ─────────────────────────────────────── -->
+  <section id="socios-activos" class="py-14 md:py-24 bg-surface section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+
+      <!-- Cabecera -->
+      <div class="mb-10">
+        <p class="text-xs font-black uppercase tracking-widest text-secondary mb-3">Comunidad ICHDT</p>
+        <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-primary">Socios Activos</h2>
+        <span class="title-bar"></span>
+        <p class="text-on-surface-variant text-base md:text-lg font-light mt-5 max-w-2xl">
+          El ICHDT está conformado por más de 300 socios activos vinculados al estudio y ejercicio del Derecho Tributario en Chile.
+        </p>
+      </div>
+
+      <!-- Barra de búsqueda -->
+      <div class="relative mb-6 max-w-md">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/40 text-xl pointer-events-none">search</span>
+        <input
+          id="search-socios"
+          type="text"
+          placeholder="Buscar por nombre…"
+          class="w-full bg-white border border-outline-variant rounded-xl pl-11 pr-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all placeholder:text-on-surface-variant/35"
+        />
+      </div>
+
+      <!-- Filtro alfabético A–Z -->
+      <div class="flex flex-wrap gap-1.5 mb-10" id="alpha-filter" role="group" aria-label="Filtrar por letra">
+        <button class="alpha-btn active" data-letter="todos">Todos</button>
+        <button class="alpha-btn" data-letter="A">A</button>
+        <button class="alpha-btn" data-letter="B">B</button>
+        <button class="alpha-btn" data-letter="C">C</button>
+        <button class="alpha-btn" data-letter="D">D</button>
+        <button class="alpha-btn" data-letter="E">E</button>
+        <button class="alpha-btn" data-letter="F">F</button>
+        <button class="alpha-btn" data-letter="G">G</button>
+        <button class="alpha-btn" data-letter="H">H</button>
+        <button class="alpha-btn" data-letter="I">I</button>
+        <button class="alpha-btn" data-letter="J">J</button>
+        <button class="alpha-btn" data-letter="K">K</button>
+        <button class="alpha-btn" data-letter="L">L</button>
+        <button class="alpha-btn" data-letter="M">M</button>
+        <button class="alpha-btn" data-letter="N">N</button>
+        <button class="alpha-btn" data-letter="O">O</button>
+        <button class="alpha-btn" data-letter="P">P</button>
+        <button class="alpha-btn" data-letter="Q">Q</button>
+        <button class="alpha-btn" data-letter="R">R</button>
+        <button class="alpha-btn" data-letter="S">S</button>
+        <button class="alpha-btn" data-letter="T">T</button>
+        <button class="alpha-btn" data-letter="U">U</button>
+        <button class="alpha-btn" data-letter="V">V</button>
+        <button class="alpha-btn" data-letter="W">W</button>
+        <button class="alpha-btn" data-letter="X">X</button>
+        <button class="alpha-btn" data-letter="Y">Y</button>
+        <button class="alpha-btn" data-letter="Z">Z</button>
+      </div>
+
+      <!-- Grid socios activos (muestra 12 de ejemplo) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="grid-socios">
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Ana García" data-letra="A">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Ana García</h3>
+            <p class="text-[10px] text-secondary font-black uppercase tracking-widest mt-0.5">Abogada</p>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Bernardita Rojas" data-letra="B">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Bernardita Rojas</h3>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Carlos Méndez" data-letra="C">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Carlos Méndez</h3>
+            <p class="text-[10px] text-secondary font-black uppercase tracking-widest mt-0.5">Contador</p>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Diego Fernández" data-letra="D">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Diego Fernández</h3>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Elena Vásquez" data-letra="E">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Elena Vásquez</h3>
+            <p class="text-[10px] text-secondary font-black uppercase tracking-widest mt-0.5">Abogada</p>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Felipe Torres" data-letra="F">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Felipe Torres</h3>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Gonzalo Pereira" data-letra="G">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Gonzalo Pereira</h3>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Hilda Moreno" data-letra="H">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Hilda Moreno</h3>
+            <p class="text-[10px] text-secondary font-black uppercase tracking-widest mt-0.5">Auditora</p>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Isabel Castro" data-letra="I">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Isabel Castro</h3>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Jorge Reyes" data-letra="J">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Jorge Reyes</h3>
+            <p class="text-[10px] text-secondary font-black uppercase tracking-widest mt-0.5">Abogado</p>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Laura Sepúlveda" data-letra="L">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Laura Sepúlveda</h3>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl overflow-hidden person-card card-shadow border border-outline-variant/30" data-name="Mario Valenzuela" data-letra="M">
+          <div class="avatar-sm"><span class="material-symbols-outlined text-primary/25" style="font-size:40px">person</span></div>
+          <div class="p-3 text-center">
+            <h3 class="font-headline text-xs font-bold text-primary leading-snug">Mario Valenzuela</h3>
+            <p class="text-[10px] text-secondary font-black uppercase tracking-widest mt-0.5">Consultor</p>
+            <div class="flex justify-center gap-1.5 mt-2">
+              <a href="#" class="icon-social"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+              <a href="mailto:" class="icon-social"><span class="material-symbols-outlined" style="font-size:14px">mail</span></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sin resultados -->
+      <div id="no-results" class="hidden text-center py-16 text-on-surface-variant/50 text-sm font-semibold">
+        No se encontraron socios con ese criterio de búsqueda.
+      </div>
+
+      <!-- Botón Ver más -->
+      <div class="flex justify-center mt-10">
+        <button id="btn-ver-mas" class="flex items-center gap-2 border-2 border-primary text-primary px-10 py-3.5 font-bold text-sm rounded-full hover:bg-primary hover:text-white transition-all">
+          Ver más socios
+          <span class="material-symbols-outlined text-lg">expand_more</span>
+        </button>
+      </div>
+
+      <p class="text-center text-xs text-on-surface-variant/40 font-semibold mt-4">
+        El listado completo se conecta a la base de datos de socios del Instituto.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ── 8. CIFRAS INSTITUCIONALES ─────────────────────────────── -->
+  <section class="py-14 bg-surface border-y border-outline-variant/40 section-reveal" aria-label="Cifras institucionales">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-10 text-center divide-y md:divide-y-0 divide-outline-variant/40">
+
+        <div class="space-y-2 py-8 md:py-0">
+          <p class="font-headline text-5xl font-black text-primary">
+            <span class="counter-num" data-target="21" data-suffix="">0</span>
+          </p>
+          <p class="text-xs font-bold uppercase tracking-[0.22em] text-on-surface-variant">Socios Honorarios</p>
+        </div>
+
+        <div class="space-y-2 py-8 md:py-0 md:border-x border-outline-variant/50">
+          <p class="font-headline text-5xl font-black text-primary">
+            <span class="counter-num" data-target="339" data-suffix="">0</span>
+          </p>
+          <p class="text-xs font-bold uppercase tracking-[0.22em] text-on-surface-variant">Socios Activos</p>
+        </div>
+
+        <div class="space-y-2 py-8 md:py-0">
+          <p class="font-headline text-5xl font-black text-primary">
+            <span class="counter-num" data-target="7" data-suffix="">0</span>
+          </p>
+          <p class="text-xs font-bold uppercase tracking-[0.22em] text-on-surface-variant">Directorio</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 9. CONTACTO / CIERRE ──────────────────────────────────── -->
+  <section id="contacto" class="py-14 md:py-24 lg:py-32 bg-surface section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+
+        <!-- Columna info -->
+        <div class="space-y-10">
+          <div>
+            <p class="text-xs font-black uppercase tracking-widest text-secondary mb-3">Escríbenos</p>
+            <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-primary">Contáctanos</h2>
+            <span class="title-bar"></span>
+            <p class="text-on-surface-variant text-lg font-light leading-relaxed mt-6">
+              Para información de actividades, contáctenos.
+            </p>
+          </div>
+
+          <div class="space-y-8">
+            <div class="flex items-center gap-5 group">
+              <div class="w-11 h-11 bg-primary/6 rounded-full flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all">
+                <span class="material-symbols-outlined text-lg">mail</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-secondary mb-1">Email</p>
+                <p class="text-lg font-bold text-primary">contacto@ichdt.cl</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-5 group">
+              <div class="w-11 h-11 bg-primary/6 rounded-full flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all">
+                <span class="material-symbols-outlined text-lg">call</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-secondary mb-1">Teléfono</p>
+                <p class="text-lg font-bold text-primary">+56 2 2234 5678</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-5 group">
+              <div class="w-11 h-11 bg-primary/6 rounded-full flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all">
+                <span class="material-symbols-outlined text-lg">location_on</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-secondary mb-1">Dirección</p>
+                <p class="text-lg font-bold text-primary leading-snug">Av. Apoquindo 1234, Las Condes, Santiago.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna formulario -->
+        <div class="bg-surface-container-low p-6 sm:p-10 rounded-3xl border border-outline-variant/30">
+
+          <div id="form-success" class="hidden mb-6 bg-green-50 border border-green-200 text-green-800 px-5 py-4 rounded-xl text-sm font-semibold flex items-center gap-3">
+            <span class="material-symbols-outlined text-green-600 text-xl">check_circle</span>
+            Tu mensaje ha sido enviado correctamente.
+          </div>
+
+          <form id="contact-form" novalidate class="space-y-6">
+
+            <div class="space-y-1.5">
+              <label for="name" class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Nombre completo <span class="text-red-400">*</span></label>
+              <input
+                id="name" name="name" type="text"
+                placeholder="Juan Pérez"
+                class="w-full bg-white border border-outline-variant rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all placeholder:text-on-surface-variant/35"
+              />
+              <p class="field-error hidden text-xs text-red-500 mt-1">Este campo es requerido.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="space-y-1.5">
+                <label for="email" class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Correo electrónico <span class="text-red-400">*</span></label>
+                <input
+                  id="email" name="email" type="email"
+                  placeholder="juan@ejemplo.cl"
+                  class="w-full bg-white border border-outline-variant rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all placeholder:text-on-surface-variant/35"
+                />
+                <p class="field-error hidden text-xs text-red-500 mt-1">Ingresa un email válido.</p>
+              </div>
+              <div class="space-y-1.5">
+                <label for="phone" class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Teléfono</label>
+                <input
+                  id="phone" name="phone" type="tel"
+                  placeholder="+56 9 1234 5678"
+                  class="w-full bg-white border border-outline-variant rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all placeholder:text-on-surface-variant/35"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="message" class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Mensaje <span class="text-red-400">*</span></label>
+              <textarea
+                id="message" name="message"
+                placeholder="¿En qué podemos ayudarte?"
+                rows="5"
+                class="w-full bg-white border border-outline-variant rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all placeholder:text-on-surface-variant/35 resize-none"
+              ></textarea>
+              <p class="field-error hidden text-xs text-red-500 mt-1">Este campo es requerido.</p>
+            </div>
+
+            <button type="submit" class="w-full bg-secondary text-white py-4 font-bold rounded-full hover:opacity-90 hover:shadow-lg transition-all active:scale-[0.98] text-sm tracking-wide">
+              Enviar
+            </button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════ -->
+<footer id="site-footer" class="bg-primary text-white pt-12 md:pt-20 pb-8 overflow-hidden relative">
+  <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+
+      <div class="space-y-6 lg:col-span-1">
+        <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-16 w-auto object-contain brightness-0 invert" />
+        <p class="text-blue-200/80 font-light text-sm leading-relaxed">
+          Instituto Chileno de Derecho Tributario<br/>
+          65 años promoviendo el estudio y desarrollo del Derecho Tributario en Chile.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Menú rápido</h4>
+        <ul class="space-y-3">
+          <li><a href="index.html"             class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Inicio</a></li>
+          <li><a href="quienes-somos.html"     class="text-white text-sm font-semibold transition-colors hover:pl-1 block">Quiénes Somos</a></li>
+          <li><a href="index.html#noticias"    class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Noticias</a></li>
+          <li><a href="index.html#contacto"    class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Hazte Socio</a></li>
+          <li><a href="#contacto"              class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Contacto</h4>
+        <ul class="space-y-4 text-blue-200/70 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">location_on</span>
+            Av. Apoquindo 1234, Las Condes, Santiago
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0">mail</span>
+            contacto@ichdt.cl
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0">call</span>
+            +56 2 2234 5678
+          </li>
+        </ul>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Síguenos</h4>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="white" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter/X" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">share</span>
+          </a>
+          <a href="#" aria-label="YouTube" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">play_circle</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-blue-200/40 text-[11px] font-bold uppercase tracking-widest">
+        © 2026 Instituto Chileno de Derecho Tributario. Todos los derechos reservados.
+      </p>
+      <div class="flex gap-5 text-[11px] font-bold text-blue-200/40 uppercase tracking-widest">
+        <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
+        <span>|</span>
+        <a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Botón volver arriba -->
+<button
+  id="btn-top"
+  onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-8 right-8 z-50 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all focus:outline-none"
+  aria-label="Volver al inicio"
+>
+  <span class="material-symbols-outlined text-2xl">arrow_upward</span>
+</button>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════════════ -->
+<script>
+  /* ── Scroll reveal ─────────────────────────────────────────── */
+  const revealObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.section-reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── Botón volver arriba ────────────────────────────────────── */
+  const btnTop = document.getElementById('btn-top');
+  window.addEventListener('scroll', () => {
+    btnTop.classList.toggle('visible', window.scrollY > 320);
+  });
+
+  /* ── Header sombra al hacer scroll ─────────────────────────── */
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.style.boxShadow = window.scrollY > 10
+      ? '0 4px 20px -2px rgba(0,0,0,0.08)'
+      : 'none';
+  });
+
+  /* ── Menú mobile ────────────────────────────────────────────── */
+  document.getElementById('btn-menu').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+
+  /* ── Count-up animado ───────────────────────────────────────── */
+  const counters = document.querySelectorAll('.counter-num');
+  let counted = false;
+  const counterObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      counters.forEach(el => {
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const step = 16;
+        const increment = target / (duration / step);
+        let current = 0;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) { current = target; clearInterval(timer); }
+          el.textContent = Math.floor(current) + suffix;
+        }, step);
+      });
+    }
+  }, { threshold: 0.5 });
+  if (counters.length) counterObserver.observe(counters[0].closest('section'));
+
+  /* ── Validación formulario ──────────────────────────────────── */
+  const form = document.getElementById('contact-form');
+  const successMsg = document.getElementById('form-success');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+    form.querySelectorAll('.field-error').forEach(el => el.classList.add('hidden'));
+    form.querySelectorAll('input, textarea').forEach(el => el.classList.remove('border-red-400'));
+
+    const name = form.querySelector('#name');
+    if (!name.value.trim()) { showError(name); valid = false; }
+
+    const email = form.querySelector('#email');
+    if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { showError(email); valid = false; }
+
+    const message = form.querySelector('#message');
+    if (!message.value.trim()) { showError(message); valid = false; }
+
+    if (valid) {
+      form.reset();
+      successMsg.classList.remove('hidden');
+      setTimeout(() => successMsg.classList.add('hidden'), 5000);
+    }
+  });
+
+  function showError(field) {
+    field.classList.add('border-red-400');
+    const err = field.closest('.space-y-1\\.5')?.querySelector('.field-error');
+    if (err) err.classList.remove('hidden');
+  }
+
+  /* ── Filtro alfabético socios activos ───────────────────────── */
+  const alphaButtons = document.querySelectorAll('.alpha-btn');
+  const socioCards   = document.querySelectorAll('#grid-socios [data-letra]');
+  const noResults    = document.getElementById('no-results');
+  const searchInput  = document.getElementById('search-socios');
+
+  function filterSocios() {
+    const activeBtn  = document.querySelector('.alpha-btn.active');
+    const letra      = activeBtn ? activeBtn.dataset.letter : 'todos';
+    const query      = searchInput.value.trim().toLowerCase();
+    let visible = 0;
+
+    socioCards.forEach(card => {
+      const name   = (card.dataset.name || '').toLowerCase();
+      const cardL  = (card.dataset.letra || '').toUpperCase();
+      const matchL = letra === 'todos' || cardL === letra;
+      const matchQ = !query || name.includes(query);
+      const show   = matchL && matchQ;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    noResults.classList.toggle('hidden', visible > 0);
+  }
+
+  alphaButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      alphaButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterSocios();
+    });
+  });
+
+  searchInput.addEventListener('input', () => {
+    alphaButtons.forEach(b => b.classList.remove('active'));
+    document.querySelector('[data-letter="todos"]').classList.add('active');
+    filterSocios();
+  });
+
+  /* ── Ver más socios (simulado) ──────────────────────────────── */
+  document.getElementById('btn-ver-mas').addEventListener('click', function() {
+    this.textContent = 'Cargando…';
+    this.disabled = true;
+    setTimeout(() => {
+      this.innerHTML = `<span>Todos los socios cargados</span>`;
+      this.classList.replace('border-primary','border-outline-variant/40');
+      this.classList.replace('text-primary','text-on-surface-variant/40');
+      this.disabled = true;
+    }, 1200);
+  });
+</script>
+
+</body>
+</html>
