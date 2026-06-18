@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="light" lang="es" style="scroll-behavior:smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Política de Privacidad del Instituto Chileno de Derecho Tributario — ICHDT." />
+  <title>Política de Privacidad — ICHDT</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary":               "#044D8C",
+            "secondary":             "#1BCBF2",
+            "background":            "#FDFDFD",
+            "surface":               "#FFFFFF",
+            "on-surface":            "#1A1C1E",
+            "on-surface-variant":    "#44474E",
+            "outline-variant":       "#E1E2E8",
+            "surface-container-low": "#F7F9FC",
+          },
+          fontFamily: {
+            "headline": ["Libre Caslon Text", "serif"],
+            "body":     ["Open Sans", "sans-serif"],
+          },
+          maxWidth: { "site": "1280px" },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: #044D8C; transition: width 0.3s ease; }
+    .nav-link:hover::after { width: 100%; }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    #mobile-menu.open { max-height: 400px; }
+    #btn-top { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    #btn-top.visible { opacity: 1; visibility: visible; }
+
+    .page-hero { background: #044D8C; min-height: 200px; display: flex; align-items: flex-end; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: rgba(27,203,242,0.06); top: -180px; right: -60px; pointer-events: none; }
+
+    /* ─── Contenido legal ─── */
+    .legal-body { font-size: 0.9375rem; line-height: 1.85; color: #44474E; }
+    .legal-body h2 { font-family: 'Libre Caslon Text', serif; font-size: 1.2rem; font-weight: 700; color: #044D8C; margin-top: 2.2em; margin-bottom: 0.6em; padding-bottom: 8px; border-bottom: 2px solid #E1E2E8; }
+    .legal-body h2:first-child { margin-top: 0; }
+    .legal-body p { margin-bottom: 1.1em; }
+    .legal-body ul { list-style: none; padding: 0; margin-bottom: 1.2em; }
+    .legal-body ul li { padding-left: 1.4em; position: relative; margin-bottom: 0.5em; }
+    .legal-body ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 7px; height: 7px; border-radius: 50%; background: #1BCBF2; }
+    .legal-body strong { color: #1A1C1E; }
+    .legal-body a { color: #044D8C; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    .legal-body a:hover { color: #1BCBF2; }
+
+    /* ─── Índice lateral ─── */
+    .toc-link { display: block; font-size: 13px; font-weight: 600; color: #44474E; padding: 6px 0 6px 12px; border-left: 2px solid #E1E2E8; transition: color 0.2s ease, border-color 0.2s ease; }
+    .toc-link:hover, .toc-link.active { color: #044D8C; border-left-color: #1BCBF2; }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-secondary/30">
+
+<!-- ════════════ HEADER ════════════ -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 bg-white border-b border-outline-variant/50 transition-shadow duration-300">
+  <div class="max-w-site mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-20 py-3">
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-10 sm:h-14 w-auto object-contain" />
+    </a>
+    <nav class="hidden md:flex gap-8 items-center">
+      <a href="index.html"          class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Inicio</a>
+      <a href="quienes-somos.html"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Quiénes Somos</a>
+      <a href="noticias.html"       class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Noticias</a>
+      <a href="publicaciones.html"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Publicaciones</a>
+      <a href="index.html#contacto" class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Contacto</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <a href="hazte-socio.html" class="hidden md:inline-flex bg-secondary text-white px-7 py-2.5 font-bold text-sm rounded-full hover:opacity-90 hover:shadow-lg transition-all active:scale-95">Hazte Socio</a>
+      <button id="btn-menu" class="md:hidden p-2 rounded-lg hover:bg-surface-container-low transition-colors" aria-label="Abrir menú">
+        <span class="material-symbols-outlined text-primary">menu</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-outline-variant/40">
+    <nav class="flex flex-col px-6 py-4 gap-4">
+      <a href="index.html"          class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Inicio</a>
+      <a href="quienes-somos.html"  class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Quiénes Somos</a>
+      <a href="noticias.html"       class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Noticias</a>
+      <a href="publicaciones.html"  class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Publicaciones</a>
+      <a href="index.html#contacto" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Contacto</a>
+      <a href="hazte-socio.html"    class="bg-secondary text-white text-center px-6 py-2.5 font-bold text-sm rounded-full mt-2">Hazte Socio</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════════════ MAIN ════════════ -->
+<main class="mt-[64px] sm:mt-[72px]">
+
+  <!-- ── HERO ── -->
+  <div class="page-hero">
+    <div class="relative z-10 max-w-site mx-auto w-full px-4 sm:px-6 lg:px-20 pb-10 pt-14">
+      <nav class="flex items-center gap-1.5 text-xs font-semibold text-blue-200/60 mb-5 flex-wrap">
+        <a href="index.html" class="hover:text-white transition-colors">Inicio</a>
+        <span class="material-symbols-outlined" style="font-size:14px">chevron_right</span>
+        <span class="text-white/80">Política de Privacidad</span>
+      </nav>
+      <h1 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">Política de Privacidad</h1>
+      <span class="block w-20 h-1 bg-secondary rounded-full mt-5"></span>
+      <p class="text-blue-100/70 text-sm mt-4">Última actualización: junio de 2026</p>
+    </div>
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="absolute bottom-0 left-0 w-full h-12 md:h-16 block">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FDFDFD"/>
+    </svg>
+  </div>
+
+
+  <!-- ── CONTENIDO ── -->
+  <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20 py-12 md:py-16">
+    <div class="grid lg:grid-cols-[240px_1fr] gap-12 items-start">
+
+      <!-- Índice navegación -->
+      <aside class="hidden lg:block sticky top-28">
+        <p class="text-[11px] font-black uppercase tracking-widest text-secondary mb-4">Contenido</p>
+        <nav class="space-y-1" id="toc">
+          <a href="#s1"  class="toc-link">1. Responsable</a>
+          <a href="#s2"  class="toc-link">2. Datos que recopilamos</a>
+          <a href="#s3"  class="toc-link">3. Finalidad del tratamiento</a>
+          <a href="#s4"  class="toc-link">4. Base legal</a>
+          <a href="#s5"  class="toc-link">5. Comunicación a terceros</a>
+          <a href="#s6"  class="toc-link">6. Conservación</a>
+          <a href="#s7"  class="toc-link">7. Derechos ARCO</a>
+          <a href="#s8"  class="toc-link">8. Seguridad</a>
+          <a href="#s9"  class="toc-link">9. Cookies</a>
+          <a href="#s10" class="toc-link">10. Modificaciones</a>
+          <a href="#s11" class="toc-link">11. Contacto</a>
+        </nav>
+      </aside>
+
+      <!-- Texto legal -->
+      <article class="legal-body max-w-3xl">
+
+        <p>El <strong>Instituto Chileno de Derecho Tributario</strong> (en adelante, «ICHDT» o «el Instituto»), con domicilio en Av. Apoquindo 1234, Las Condes, Santiago de Chile, es el responsable del tratamiento de los datos personales que se recopilan a través del sitio web <strong>ichdt.cl</strong> y de los formularios de adhesión y contacto del Instituto.</p>
+        <p>El ICHDT se compromete a tratar sus datos personales con plena observancia de la <strong>Ley N.º 19.628 sobre Protección de la Vida Privada</strong> y demás normativa aplicable en Chile, garantizando su confidencialidad, integridad y uso exclusivo para los fines que se detallan a continuación.</p>
+
+        <h2 id="s1">1. Responsable del tratamiento</h2>
+        <ul>
+          <li><strong>Nombre:</strong> Instituto Chileno de Derecho Tributario</li>
+          <li><strong>Domicilio:</strong> Av. Apoquindo 1234, Las Condes, Santiago</li>
+          <li><strong>Correo electrónico:</strong> <a href="mailto:contacto@ichdt.cl">contacto@ichdt.cl</a></li>
+          <li><strong>Teléfono:</strong> +56 2 2234 5678</li>
+        </ul>
+
+        <h2 id="s2">2. Datos personales que recopilamos</h2>
+        <p>El ICHDT recopila los siguientes datos, según el canal de interacción:</p>
+        <ul>
+          <li><strong>Formulario de contacto:</strong> nombre, correo electrónico, teléfono y mensaje.</li>
+          <li><strong>Solicitud de admisión como socio:</strong> nombres y apellidos, RUT, fecha de nacimiento, dirección particular y comercial, teléfonos, correos electrónicos, empleador, antecedentes académicos (pregrado y postgrado), socios patrocinantes, experiencia profesional, publicaciones y experiencia docente.</li>
+          <li><strong>Navegación en el sitio web:</strong> dirección IP, tipo de navegador, páginas visitadas y duración de la sesión, a través de cookies técnicas.</li>
+        </ul>
+
+        <h2 id="s3">3. Finalidad del tratamiento</h2>
+        <p>Los datos recopilados se utilizan con las siguientes finalidades:</p>
+        <ul>
+          <li>Gestionar solicitudes de información y atender consultas enviadas a través del formulario de contacto.</li>
+          <li>Tramitar y evaluar solicitudes de admisión como socio del ICHDT ante el Directorio.</li>
+          <li>Administrar la relación de membresía, incluyendo el cobro de cuotas y la comunicación de actividades y publicaciones del Instituto.</li>
+          <li>Enviar comunicaciones institucionales, noticias, eventos y publicaciones de interés tributario a socios y personas que han manifestado su interés.</li>
+          <li>Mejorar el funcionamiento y la experiencia del sitio web del Instituto.</li>
+          <li>Cumplir con obligaciones legales y regulatorias aplicables al Instituto.</li>
+        </ul>
+
+        <h2 id="s4">4. Base legal del tratamiento</h2>
+        <p>El tratamiento de sus datos personales se fundamenta en:</p>
+        <ul>
+          <li><strong>Consentimiento del titular:</strong> otorgado de forma expresa al completar formularios o al solicitar la admisión como socio.</li>
+          <li><strong>Ejecución de una relación contractual:</strong> en el caso de socios activos, el tratamiento es necesario para cumplir las obligaciones derivadas del Estatuto del ICHDT.</li>
+          <li><strong>Interés legítimo:</strong> para el envío de comunicaciones institucionales directamente relacionadas con el ámbito tributario que constituye el objeto del Instituto.</li>
+        </ul>
+
+        <h2 id="s5">5. Comunicación a terceros</h2>
+        <p>El ICHDT no cede, vende ni transfiere datos personales a terceros con fines comerciales. Los datos podrán ser comunicados únicamente en los siguientes supuestos:</p>
+        <ul>
+          <li>A los miembros del <strong>Directorio del ICHDT</strong>, en el marco del proceso de evaluación y aprobación de solicitudes de admisión.</li>
+          <li>A proveedores de servicios tecnológicos que actúan como encargados del tratamiento (alojamiento web, plataformas de correo), bajo acuerdos de confidencialidad.</li>
+          <li>A las autoridades competentes cuando exista una obligación legal de informar.</li>
+        </ul>
+        <p>En ningún caso los datos serán transferidos internacionalmente sin las debidas garantías de protección equivalente.</p>
+
+        <h2 id="s6">6. Plazo de conservación</h2>
+        <p>Los datos personales se conservarán durante el tiempo necesario para cumplir la finalidad para la que fueron recopilados:</p>
+        <ul>
+          <li><strong>Formulario de contacto:</strong> hasta 2 años desde la última interacción, salvo que el interesado solicite su supresión antes.</li>
+          <li><strong>Datos de socios activos:</strong> durante toda la vigencia de la membresía y hasta 5 años después de la baja, para cumplir eventuales obligaciones legales o estatutarias.</li>
+          <li><strong>Solicitudes de admisión denegadas:</strong> hasta 1 año desde la notificación de la resolución del Directorio.</li>
+          <li><strong>Datos de navegación:</strong> según la política de cookies vigente (máximo 13 meses).</li>
+        </ul>
+
+        <h2 id="s7">7. Derechos del titular (ARCO)</h2>
+        <p>De conformidad con la Ley N.º 19.628, el titular de los datos tiene derecho a:</p>
+        <ul>
+          <li><strong>Acceso:</strong> conocer qué datos personales suyos trata el ICHDT y con qué finalidad.</li>
+          <li><strong>Rectificación:</strong> solicitar la corrección de datos inexactos, incompletos o desactualizados.</li>
+          <li><strong>Cancelación (supresión):</strong> pedir la eliminación de sus datos cuando ya no sean necesarios para la finalidad que justificó su recopilación.</li>
+          <li><strong>Oposición:</strong> oponerse al tratamiento de sus datos para finalidades de comunicaciones institucionales o de marketing directo.</li>
+        </ul>
+        <p>Para ejercer cualquiera de estos derechos, puede contactarnos enviando un correo a <a href="mailto:contacto@ichdt.cl">contacto@ichdt.cl</a>, indicando su nombre completo, RUT y la solicitud específica. El Instituto responderá en un plazo máximo de <strong>30 días hábiles</strong>.</p>
+
+        <h2 id="s8">8. Seguridad de la información</h2>
+        <p>El ICHDT adopta medidas técnicas y organizativas adecuadas para proteger sus datos personales frente a acceso no autorizado, alteración, divulgación o destrucción accidental, incluyendo:</p>
+        <ul>
+          <li>Transmisión cifrada mediante protocolo HTTPS.</li>
+          <li>Acceso restringido a los datos por parte del personal autorizado del Instituto.</li>
+          <li>Revisión periódica de las medidas de seguridad implementadas.</li>
+        </ul>
+        <p>No obstante, ningún sistema de transmisión de datos por Internet puede garantizarse como absolutamente seguro, por lo que el ICHDT no puede asegurar la seguridad total de la información transmitida.</p>
+
+        <h2 id="s9">9. Cookies</h2>
+        <p>El sitio web del ICHDT utiliza únicamente <strong>cookies técnicas o estrictamente necesarias</strong> para garantizar el correcto funcionamiento del sitio (gestión de sesiones, preferencias de idioma). No se utilizan cookies de rastreo de terceros ni de publicidad comportamental.</p>
+        <p>El usuario puede configurar su navegador para rechazar o eliminar las cookies; sin embargo, ello podría afectar a la correcta visualización de algunas secciones del sitio.</p>
+
+        <h2 id="s10">10. Modificaciones de la política</h2>
+        <p>El ICHDT se reserva el derecho de actualizar la presente Política de Privacidad en cualquier momento para adaptarla a cambios legislativos o de práctica institucional. Cualquier modificación será comunicada mediante su publicación en esta misma página, con indicación de la fecha de última actualización. Se recomienda revisar periódicamente esta política.</p>
+
+        <h2 id="s11">11. Contacto</h2>
+        <p>Para cualquier consulta relativa al tratamiento de sus datos personales o al ejercicio de sus derechos, puede dirigirse al ICHDT a través de los siguientes medios:</p>
+        <ul>
+          <li><strong>Correo electrónico:</strong> <a href="mailto:contacto@ichdt.cl">contacto@ichdt.cl</a></li>
+          <li><strong>Dirección postal:</strong> Av. Apoquindo 1234, Las Condes, Santiago de Chile</li>
+          <li><strong>Teléfono:</strong> +56 2 2234 5678</li>
+        </ul>
+
+      </article>
+    </div>
+  </div>
+
+</main>
+
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer id="site-footer" class="bg-primary text-white pt-12 md:pt-20 pb-8 overflow-hidden relative">
+  <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+  <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+      <div class="space-y-6">
+        <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-16 w-auto object-contain brightness-0 invert" />
+        <p class="text-blue-200/80 font-light text-sm leading-relaxed">Instituto Chileno de Derecho Tributario<br/>65 años promoviendo el estudio y desarrollo del Derecho Tributario en Chile.</p>
+        <div class="pt-3 border-t border-white/10">
+          <p class="text-[10px] font-black uppercase tracking-widest text-blue-200/40 mb-3">Parte de</p>
+          <a href="https://www.iladt.org" target="_blank" rel="noopener" class="flex items-center gap-3 group">
+            <img src="https://ichdt.cl/images/enlaces/partner_1.png" alt="ILADT" class="h-10 w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity brightness-0 invert" />
+            <span class="text-blue-200/60 text-xs font-semibold group-hover:text-white transition-colors leading-snug">Pertenecemos<br/>a ILADT</span>
+          </a>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Menú rápido</h4>
+        <ul class="space-y-3">
+          <li><a href="index.html"          class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Inicio</a></li>
+          <li><a href="quienes-somos.html"  class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Quiénes Somos</a></li>
+          <li><a href="noticias.html"       class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Noticias</a></li>
+          <li><a href="publicaciones.html"  class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Publicaciones</a></li>
+          <li><a href="index.html#contacto" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Contacto</a></li>
+          <li><a href="hazte-socio.html"    class="text-white text-sm font-semibold hover:pl-1 block">Hazte Socio</a></li>
+        </ul>
+      </div>
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Contacto</h4>
+        <ul class="space-y-4 text-blue-200/70 text-sm">
+          <li class="flex items-start gap-3"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">location_on</span>Av. Apoquindo 1234, Las Condes, Santiago</li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-lg shrink-0">mail</span>contacto@ichdt.cl</li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-lg shrink-0">call</span>+56 2 2234 5678</li>
+        </ul>
+      </div>
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Síguenos</h4>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter/X" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">share</span>
+          </a>
+          <a href="#" aria-label="YouTube" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">play_circle</span>
+          </a>
+        </div>
+        <div class="pt-2 space-y-2 text-xs">
+          <a href="politica-de-privacidad.html" class="text-secondary font-semibold hover:text-white transition-colors block">Política de Privacidad</a>
+          <a href="terminos-y-condiciones.html"  class="text-blue-200/60 hover:text-white transition-colors block">Términos y Condiciones</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-blue-200/40 text-[11px] font-bold uppercase tracking-widest">© 2026 Instituto Chileno de Derecho Tributario. Todos los derechos reservados.</p>
+      <div class="flex gap-5 text-[11px] font-bold text-blue-200/40 uppercase tracking-widest">
+        <a href="politica-de-privacidad.html" class="hover:text-white transition-colors">Política de Privacidad</a>
+        <span>|</span>
+        <a href="terminos-y-condiciones.html"  class="hover:text-white transition-colors">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="btn-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-8 right-8 z-50 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all focus:outline-none"
+  aria-label="Volver al inicio">
+  <span class="material-symbols-outlined text-2xl">arrow_upward</span>
+</button>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-md', window.scrollY > 10);
+    document.getElementById('btn-top').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  document.getElementById('btn-menu').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+
+  /* Resaltar enlace del índice activo al hacer scroll */
+  const sections = document.querySelectorAll('article [id]');
+  const tocLinks = document.querySelectorAll('#toc a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    tocLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+  }, { passive: true });
+</script>
+
+</body>
+</html>

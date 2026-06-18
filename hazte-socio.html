@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html class="light" lang="es" style="scroll-behavior:smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Solicitud de admisión como socio del Instituto Chileno de Derecho Tributario — ICHDT." />
+  <title>Hazte Socio — ICHDT</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary":               "#044D8C",
+            "secondary":             "#1BCBF2",
+            "background":            "#FDFDFD",
+            "surface":               "#FFFFFF",
+            "on-surface":            "#1A1C1E",
+            "on-surface-variant":    "#44474E",
+            "outline-variant":       "#E1E2E8",
+            "surface-container-low": "#F7F9FC",
+          },
+          fontFamily: {
+            "headline": ["Libre Caslon Text", "serif"],
+            "body":     ["Open Sans", "sans-serif"],
+          },
+          maxWidth: { "site": "1280px" },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: #044D8C; transition: width 0.3s ease; }
+    .nav-link:hover::after { width: 100%; }
+
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    #mobile-menu.open { max-height: 400px; }
+
+    #btn-top { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    #btn-top.visible { opacity: 1; visibility: visible; }
+
+    .section-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+    .section-reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── Hero azul ─── */
+    .page-hero {
+      background: #044D8C;
+      min-height: 240px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: rgba(27,203,242,0.06);
+      top: -180px; right: -60px;
+      pointer-events: none;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      bottom: -120px; left: 4%;
+      pointer-events: none;
+    }
+
+    /* ─── Fieldset grupos ─── */
+    .form-group { background: #fff; border: 1px solid #E1E2E8; border-radius: 16px; padding: 24px 28px; }
+    .form-group-title { font-family: 'Libre Caslon Text', serif; font-size: 1rem; font-weight: 700; color: #044D8C; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+    .form-group-title .material-symbols-outlined { color: #1BCBF2; font-size: 20px; }
+
+    /* ─── Inputs ─── */
+    .field-label { display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #44474E; margin-bottom: 6px; }
+    .field-input,
+    .field-input[type="text"],
+    .field-input[type="email"],
+    .field-input[type="tel"],
+    .field-input[type="number"],
+    .field-input[type="date"],
+    select.field-input {
+      width: 100%;
+      background: #F7F9FC;
+      border: 1.5px solid #E1E2E8;
+      border-radius: 99px !important;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-family: 'Open Sans', sans-serif;
+      color: #1A1C1E;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .field-input:focus,
+    select.field-input:focus {
+      border-color: #1BCBF2 !important;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(27,203,242,0.12);
+    }
+    .field-input.error { border-color: #f87171 !important; }
+    .field-input::placeholder { color: #44474E; opacity: 0.4; }
+    textarea.field-input { resize: vertical; min-height: 100px; border-radius: 20px !important; padding: 12px 18px; }
+    select.field-input { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2344474E' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
+
+    .field-error { display: none; font-size: 11px; color: #ef4444; margin-top: 4px; }
+    .field-error.show { display: block; }
+
+    /* ─── Cuota info badge ─── */
+    .cuota-badge {
+      background: linear-gradient(135deg, #044D8C 0%, #0a6abf 100%);
+      border-radius: 16px;
+      padding: 20px 24px;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-secondary/30">
+
+<!-- ════════════ HEADER ════════════ -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 bg-white border-b border-outline-variant/50 transition-shadow duration-300">
+  <div class="max-w-site mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-20 py-3">
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-10 sm:h-14 w-auto object-contain" />
+    </a>
+    <nav class="hidden md:flex gap-8 items-center">
+      <a href="index.html"          class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Inicio</a>
+      <a href="quienes-somos.html"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Quiénes Somos</a>
+      <a href="noticias.html"       class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Noticias</a>
+      <a href="publicaciones.html"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Publicaciones</a>
+      <a href="index.html#contacto" class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Contacto</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <a href="hazte-socio.html" class="hidden md:inline-flex bg-secondary text-white px-7 py-2.5 font-bold text-sm rounded-full hover:opacity-90 hover:shadow-lg transition-all active:scale-95">
+        Hazte Socio
+      </a>
+      <button id="btn-menu" class="md:hidden p-2 rounded-lg hover:bg-surface-container-low transition-colors" aria-label="Abrir menú">
+        <span class="material-symbols-outlined text-primary">menu</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-outline-variant/40">
+    <nav class="flex flex-col px-6 py-4 gap-4">
+      <a href="index.html"          class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Inicio</a>
+      <a href="quienes-somos.html"  class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Quiénes Somos</a>
+      <a href="noticias.html"       class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Noticias</a>
+      <a href="publicaciones.html"  class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Publicaciones</a>
+      <a href="index.html#contacto" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Contacto</a>
+      <a href="hazte-socio.html"    class="bg-secondary text-white text-center px-6 py-2.5 font-bold text-sm rounded-full mt-2">Hazte Socio</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════════════ MAIN ════════════ -->
+<main class="mt-[64px] sm:mt-[72px]">
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <div class="page-hero">
+    <div class="relative z-10 max-w-site mx-auto w-full px-4 sm:px-6 lg:px-20 pb-10 pt-14 sm:pt-16">
+      <nav class="flex items-center gap-1.5 text-xs font-semibold text-blue-200/60 mb-5 flex-wrap" aria-label="Ruta de navegación">
+        <a href="index.html" class="hover:text-white transition-colors">Inicio</a>
+        <span class="material-symbols-outlined" style="font-size:14px">chevron_right</span>
+        <span class="text-white/80">Hazte Socio</span>
+      </nav>
+      <p class="text-secondary text-xs font-black uppercase tracking-widest mb-3">ICHDT</p>
+      <h1 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+        Solicitud de Admisión
+      </h1>
+      <span class="block w-20 h-1 bg-secondary rounded-full mt-5"></span>
+      <p class="text-blue-100/80 text-base md:text-lg font-light mt-5 max-w-xl">
+        Completa el formulario para postular como socio del Instituto Chileno de Derecho Tributario.
+      </p>
+    </div>
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="absolute bottom-0 left-0 w-full h-12 md:h-16 block">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FDFDFD"/>
+    </svg>
+  </div>
+
+
+  <!-- ── CONTENIDO ─────────────────────────────────────────── -->
+  <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20 py-12 md:py-16">
+
+    <!-- ── INFO CARDS (sobre el formulario) ─────────────────── -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 section-reveal">
+
+      <!-- Proceso de Admisión -->
+      <div class="bg-surface-container-low rounded-2xl p-5" style="box-shadow:0 4px 20px -2px rgba(0,0,0,0.06)">
+        <h3 class="font-headline text-base font-bold text-primary mb-4 pb-3 border-b border-outline-variant/50">Proceso de Admisión</h3>
+        <ol class="space-y-3">
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5">1</span>
+            <p class="text-sm text-on-surface-variant">Completa y envía el formulario de solicitud.</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5">2</span>
+            <p class="text-sm text-on-surface-variant">El Directorio revisa tu postulación.</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5">3</span>
+            <p class="text-sm text-on-surface-variant">Recibirás confirmación de admisión por correo.</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-secondary text-white rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5">4</span>
+            <p class="text-sm text-on-surface-variant font-semibold text-primary">¡Bienvenido al ICHDT!</p>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Requisitos -->
+      <div class="bg-white border border-outline-variant rounded-2xl p-5" style="box-shadow:0 4px 20px -2px rgba(0,0,0,0.06)">
+        <h3 class="font-headline text-base font-bold text-primary mb-4 pb-3 border-b border-outline-variant/50">Requisitos</h3>
+        <ul class="space-y-3 text-sm text-on-surface-variant">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-size:18px">check_circle</span>
+            Profesional con acreditada experiencia en el ámbito tributario.
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-size:18px">check_circle</span>
+            Contar con el patrocinio de dos socios activos del ICHDT.
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-size:18px">check_circle</span>
+            Solicitud aprobada por el Directorio del Instituto.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Cuota anual -->
+      <div class="cuota-badge">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="material-symbols-outlined text-secondary text-2xl">payments</span>
+          <p class="font-headline font-bold text-lg">Cuota Anual</p>
+        </div>
+        <p class="text-3xl font-black text-secondary mb-1">$92.000</p>
+        <p class="text-blue-200/80 text-sm font-light leading-relaxed">
+          Socios nuevos: al momento de ser admitidos.<br/>
+          Socios activos: en el mes de abril de cada año.
+        </p>
+      </div>
+
+      <!-- ¿Tienes dudas? -->
+      <div class="bg-white border border-outline-variant rounded-2xl p-5" style="box-shadow:0 4px 20px -2px rgba(0,0,0,0.06)">
+        <h3 class="font-headline text-base font-bold text-primary mb-3">¿Tienes dudas?</h3>
+        <p class="text-sm text-on-surface-variant font-light mb-4">Escríbenos y te ayudamos con el proceso.</p>
+        <a href="mailto:contacto@ichdt.cl" class="flex items-center gap-2 text-primary font-bold text-sm hover:text-secondary transition-colors">
+          <span class="material-symbols-outlined text-secondary" style="font-size:18px">mail</span>
+          contacto@ichdt.cl
+        </a>
+      </div>
+
+    </div>
+
+    <!-- ── FORMULARIO ──────────────────────────────────────── -->
+    <div class="section-reveal">
+
+        <!-- Aviso éxito -->
+        <div id="form-success" class="hidden mb-8 bg-green-50 border border-green-200 text-green-800 px-6 py-5 rounded-2xl text-sm font-semibold flex items-start gap-3">
+          <span class="material-symbols-outlined text-green-600 text-2xl shrink-0">check_circle</span>
+          <div>
+            <p class="font-bold text-base mb-1">Solicitud enviada correctamente</p>
+            <p class="font-normal">Nos contactaremos contigo a la brevedad para continuar con el proceso de admisión.</p>
+          </div>
+        </div>
+
+        <form id="admission-form" novalidate class="space-y-6">
+
+          <!-- ── 1. Datos personales ─── -->
+          <div class="form-group">
+            <div class="form-group-title">
+              <span class="material-symbols-outlined">person</span>
+              Datos personales
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="field-label" for="nombres">Nombres <span class="text-red-400">*</span></label>
+                <input class="field-input" id="nombres" name="nombres" type="text" placeholder="María José" />
+                <p class="field-error" id="err-nombres">Este campo es requerido.</p>
+              </div>
+              <div>
+                <label class="field-label" for="apellidos">Apellidos <span class="text-red-400">*</span></label>
+                <input class="field-input" id="apellidos" name="apellidos" type="text" placeholder="González López" />
+                <p class="field-error" id="err-apellidos">Este campo es requerido.</p>
+              </div>
+              <div>
+                <label class="field-label" for="rut">RUT <span class="text-red-400">*</span></label>
+                <input class="field-input" id="rut" name="rut" type="text" placeholder="12.345.678-9" />
+                <p class="field-error" id="err-rut">Ingresa un RUT válido.</p>
+              </div>
+              <div>
+                <label class="field-label" for="nacimiento">Fecha de Nacimiento <span class="text-red-400">*</span></label>
+                <input class="field-input" id="nacimiento" name="nacimiento" type="date" />
+                <p class="field-error" id="err-nacimiento">Este campo es requerido.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 2. Dirección ─── -->
+          <div class="form-group">
+            <div class="form-group-title">
+              <span class="material-symbols-outlined">location_on</span>
+              Dirección
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="field-label" for="dir-particular">Particular</label>
+                <input class="field-input" id="dir-particular" name="dir_particular" type="text" placeholder="Calle, número, ciudad" />
+              </div>
+              <div>
+                <label class="field-label" for="dir-comercial">Comercial</label>
+                <input class="field-input" id="dir-comercial" name="dir_comercial" type="text" placeholder="Calle, número, ciudad" />
+              </div>
+              <div>
+                <label class="field-label" for="dir-postal">Postal</label>
+                <input class="field-input" id="dir-postal" name="dir_postal" type="text" placeholder="Casilla, código postal" />
+              </div>
+              <div>
+                <label class="field-label" for="dir-despacho">Despacho Correspondencia</label>
+                <input class="field-input" id="dir-despacho" name="dir_despacho" type="text" placeholder="Dirección de despacho" />
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 3. Teléfonos ─── -->
+          <div class="form-group">
+            <div class="form-group-title">
+              <span class="material-symbols-outlined">call</span>
+              Teléfonos
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label class="field-label" for="tel-particular">Particular</label>
+                <input class="field-input" id="tel-particular" name="tel_particular" type="tel" placeholder="+56 2 2000 0000" />
+              </div>
+              <div>
+                <label class="field-label" for="tel-celular">Celular <span class="text-red-400">*</span></label>
+                <input class="field-input" id="tel-celular" name="tel_celular" type="tel" placeholder="+56 9 0000 0000" />
+                <p class="field-error" id="err-tel-celular">Este campo es requerido.</p>
+              </div>
+              <div>
+                <label class="field-label" for="tel-comercial">Comercial</label>
+                <input class="field-input" id="tel-comercial" name="tel_comercial" type="tel" placeholder="+56 2 2000 0000" />
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 4. Correo electrónico ─── -->
+          <div class="form-group">
+            <div class="form-group-title">
+              <span class="material-symbols-outlined">mail</span>
+              Correo Electrónico
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="field-label" for="email-personal">Personal <span class="text-red-400">*</span></label>
+                <input class="field-input" id="email-personal" name="email_personal" type="email" placeholder="correo@personal.cl" />
+                <p class="field-error" id="err-email-personal">Ingresa un email válido.</p>
+              </div>
+              <div>
+                <label class="field-label" for="email-oficina">Oficina</label>
+                <input class="field-input" id="email-oficina" name="email_oficina" type="email" placeholder="correo@empresa.cl" />
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 5. Empleador ─── -->
+          <div class="form-group">
+            <div class="form-group-title">
+              <span class="material-symbols-outlined">business</span>
+              Empleador
+            </div>
+            <div>
+              <label class="field-label" for="empleador">Nombre del empleador o empresa <span class="text-red-400">*</span></label>
+              <input class="field-input" id="empleador" name="empleador" type="text" placeholder="Empresa o institución donde trabaja" />
+              <p class="field-error" id="err-empleador">Este campo es requerido.</p>
+            </div>
+          </div>
+
+          <!-- ── 6. Estudios de Pregrado ─── -->
+          <div class="form-group">
+            <div class="form-group-title">
+              <span class="material-symbols-outlined">school</span>
+              Estudios de Pregrado
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label class="field-label" for="pre-titulo">Título <span class="text-red-400">*</span></label>
+                <input class="field-input" id="pre-titulo" name="pre_titulo" type="text" placeholder="Ej: Abogado" />
+                <p class="field-error" id="err-pre-titulo">Este campo es requerido.</p>
+              </div>
+              <div>
+                <label class="field-label" for="pre-universidad">Universidad <span class="text-red-400">*</span></label>
+                <input class="field-input" id="pre-universidad" name="pre_universidad" type="text" placeholder="Nombre de la universidad" />
+                <p class="field-error" id="err-pre-universidad">Este campo es requerido.</p>
+              </div>
+              <div>
+                <label class="field-label" for="pre-anio">Año de Titulación <span class="text-red-400">*</span></label>
+                <input class="field-input" id="pre-anio" name="pre_anio" type="number" placeholder="Ej: 2005" min="1950" max="2030" />
+                <p class="field-error" id="err-pre-anio">Ingresa el año de titulación.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 7. Estudios de Postgrado ─── -->
+          <div class="form-group">
+            <div class="form-group-title">
+              <span class="material-symbols-outlined">workspace_premium</span>
+              Estudios de Postgrado
+              <span class="text-on-surface-variant/40 font-normal text-xs">(Opcional)</span>
+            </div>
+
+            <!-- Postgrado 1 -->
+            <p class="text-[11px] font-black uppercase tracking-widest text-secondary mb-3">Postgrado 1</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-6">
+              <div>
+                <label class="field-label" for="post1-titulo">Título</label>
+                <input class="field-input" id="post1-titulo" name="post1_titulo" type="text" placeholder="Ej: Magíster en Tributación" />
+              </div>
+              <div>
+                <label class="field-label" for="post1-universidad">Universidad</label>
+                <input class="field-input" id="post1-universidad" name="post1_universidad" type="text" placeholder="Nombre de la universidad" />
+              </div>
+              <div>
+                <label class="field-label" for="post1-anio">Año de Titulación</label>
+                <input class="field-input" id="post1-anio" name="post1_anio" type="number" placeholder="Ej: 2010" min="1950" max="2030" />
+              </div>
+            </div>
+
+            <!-- Postgrado 2 -->
+            <p class="text-[11px] font-black uppercase tracking-widest text-secondary mb-3">Postgrado 2</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label class="field-label" for="post2-titulo">Título</label>
+                <input class="field-input" id="post2-titulo" name="post2_titulo" type="text" placeholder="Ej: LLM" />
+              </div>
+              <div>
+                <label class="field-label" for="post2-universidad">Universidad</label>
+                <input class="field-input" id="post2-universidad" name="post2_universidad" type="text" placeholder="Nombre de la universidad" />
+              </div>
+              <div>
+                <label class="field-label" for="post2-anio">Año de Titulación</label>
+                <input class="field-input" id="post2-anio" name="post2_anio" type="number" placeholder="Ej: 2015" min="1950" max="2030" />
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 8. Socios Patrocinantes ─── -->
+          <div class="form-group">
+            <div class="form-group-title">
+              <span class="material-symbols-outlined">groups</span>
+              Socios Patrocinantes
+            </div>
+            <p class="text-on-surface-variant text-sm font-light mb-5">Para postular debes contar con el patrocinio de dos socios activos del ICHDT.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="field-label" for="patrocinante1">Socio Patrocinante 1 <span class="text-red-400">*</span></label>
+                <input class="field-input" id="patrocinante1" name="patrocinante1" type="text" placeholder="Nombre completo" />
+                <p class="field-error" id="err-patrocinante1">Este campo es requerido.</p>
+              </div>
+              <div>
+                <label class="field-label" for="patrocinante2">Socio Patrocinante 2 <span class="text-red-400">*</span></label>
+                <input class="field-input" id="patrocinante2" name="patrocinante2" type="text" placeholder="Nombre completo" />
+                <p class="field-error" id="err-patrocinante2">Este campo es requerido.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 9. Experiencia y méritos ─── -->
+          <div class="form-group">
+            <div class="form-group-title">
+              <span class="material-symbols-outlined">gavel</span>
+              Experiencia y Méritos
+            </div>
+            <div class="space-y-5">
+              <div>
+                <label class="field-label" for="experiencia">Experiencia profesional en materias tributarias <span class="text-red-400">*</span></label>
+                <textarea class="field-input" id="experiencia" name="experiencia" rows="4" placeholder="Describe tu experiencia profesional en el ámbito tributario..."></textarea>
+                <p class="field-error" id="err-experiencia">Este campo es requerido.</p>
+              </div>
+              <div>
+                <label class="field-label" for="publicaciones">Publicaciones</label>
+                <textarea class="field-input" id="publicaciones" name="publicaciones" rows="3" placeholder="Lista tus publicaciones relevantes en materia tributaria (opcional)..."></textarea>
+              </div>
+              <div>
+                <label class="field-label" for="docencia">Experiencia docente</label>
+                <textarea class="field-input" id="docencia" name="docencia" rows="3" placeholder="Indica cargos o actividades de docencia en materias tributarias (opcional)..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Declaración ─── -->
+          <div class="flex items-start gap-3">
+            <input id="acepta" name="acepta" type="checkbox"
+              class="mt-1 w-4 h-4 rounded border-outline-variant text-secondary focus:ring-secondary/50 shrink-0 cursor-pointer" />
+            <label for="acepta" class="text-sm text-on-surface-variant font-light leading-relaxed cursor-pointer">
+              Declaro que la información proporcionada es verídica y autorizo al ICHDT a verificar los antecedentes suministrados. Entiendo que la admisión queda sujeta a la aprobación del Directorio.
+            </label>
+          </div>
+          <p class="field-error" id="err-acepta">Debes aceptar la declaración para continuar.</p>
+
+          <!-- ── Submit ─── -->
+          <div class="pt-2">
+            <button type="submit" class="w-full bg-secondary text-white py-4 font-bold rounded-full hover:opacity-90 hover:shadow-xl transition-all active:scale-[0.98] text-sm tracking-wide flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-lg">send</span>
+              Enviar Solicitud de Admisión
+            </button>
+            <p class="text-xs text-on-surface-variant/50 text-center mt-3 font-light">
+              Los campos marcados con <span class="text-red-400">*</span> son obligatorios.
+            </p>
+          </div>
+
+        </form>
+    </div>
+  </div>
+
+</main>
+
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer id="site-footer" class="bg-primary text-white pt-12 md:pt-20 pb-8 overflow-hidden relative">
+  <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+  <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+      <div class="space-y-6">
+        <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-16 w-auto object-contain brightness-0 invert" />
+        <p class="text-blue-200/80 font-light text-sm leading-relaxed">Instituto Chileno de Derecho Tributario<br/>65 años promoviendo el estudio y desarrollo del Derecho Tributario en Chile.</p>
+        <div class="pt-3 border-t border-white/10">
+          <p class="text-[10px] font-black uppercase tracking-widest text-blue-200/40 mb-3">Parte de</p>
+          <a href="https://www.iladt.org" target="_blank" rel="noopener" class="flex items-center gap-3 group">
+            <img src="https://ichdt.cl/images/enlaces/partner_1.png" alt="ILADT" class="h-10 w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity brightness-0 invert" />
+            <span class="text-blue-200/60 text-xs font-semibold group-hover:text-white transition-colors leading-snug">Pertenecemos<br/>a ILADT</span>
+          </a>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Menú rápido</h4>
+        <ul class="space-y-3">
+          <li><a href="index.html"          class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Inicio</a></li>
+          <li><a href="quienes-somos.html"  class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Quiénes Somos</a></li>
+          <li><a href="noticias.html"       class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Noticias</a></li>
+          <li><a href="publicaciones.html"  class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Publicaciones</a></li>
+          <li><a href="index.html#contacto" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Contacto</a></li>
+          <li><a href="hazte-socio.html"    class="text-white text-sm font-semibold hover:pl-1 block">Hazte Socio</a></li>
+        </ul>
+      </div>
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Contacto</h4>
+        <ul class="space-y-4 text-blue-200/70 text-sm">
+          <li class="flex items-start gap-3"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">location_on</span>Av. Apoquindo 1234, Las Condes, Santiago</li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-lg shrink-0">mail</span>contacto@ichdt.cl</li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-lg shrink-0">call</span>+56 2 2234 5678</li>
+        </ul>
+      </div>
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Síguenos</h4>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter/X" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">share</span>
+          </a>
+          <a href="#" aria-label="YouTube" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">play_circle</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-blue-200/40 text-[11px] font-bold uppercase tracking-widest">© 2026 Instituto Chileno de Derecho Tributario. Todos los derechos reservados.</p>
+      <div class="flex gap-5 text-[11px] font-bold text-blue-200/40 uppercase tracking-widest">
+        <a href="politica-de-privacidad.html" class="hover:text-white transition-colors">Política de Privacidad</a>
+        <span>|</span>
+        <a href="terminos-y-condiciones.html" class="hover:text-white transition-colors">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="btn-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-8 right-8 z-50 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all focus:outline-none"
+  aria-label="Volver al inicio">
+  <span class="material-symbols-outlined text-2xl">arrow_upward</span>
+</button>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-md', window.scrollY > 10);
+    document.getElementById('btn-top').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  document.getElementById('btn-menu').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
+
+  /* ── Validación ─── */
+  const REQUIRED = ['nombres','apellidos','rut','nacimiento','tel-celular','email-personal','empleador','pre-titulo','pre-universidad','pre-anio','patrocinante1','patrocinante2','experiencia'];
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  document.getElementById('admission-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+
+    /* limpiar errores */
+    document.querySelectorAll('.field-error').forEach(el => el.classList.remove('show'));
+    document.querySelectorAll('.field-input').forEach(el => el.classList.remove('error'));
+
+    /* campos requeridos */
+    REQUIRED.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el || !el.value.trim()) {
+        if (el) el.classList.add('error');
+        const err = document.getElementById('err-' + id);
+        if (err) err.classList.add('show');
+        valid = false;
+      }
+    });
+
+    /* email personal */
+    const ep = document.getElementById('email-personal');
+    if (ep && ep.value.trim() && !EMAIL_RE.test(ep.value)) {
+      ep.classList.add('error');
+      document.getElementById('err-email-personal').classList.add('show');
+      valid = false;
+    }
+
+    /* checkbox */
+    const acepta = document.getElementById('acepta');
+    if (!acepta.checked) {
+      document.getElementById('err-acepta').classList.add('show');
+      valid = false;
+    }
+
+    if (valid) {
+      this.reset();
+      const success = document.getElementById('form-success');
+      success.classList.remove('hidden');
+      window.scrollTo({ top: success.offsetTop - 120, behavior: 'smooth' });
+      setTimeout(() => success.classList.add('hidden'), 8000);
+    } else {
+      /* scroll al primer error */
+      const first = document.querySelector('.field-input.error');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+</script>
+
+</body>
+</html>
