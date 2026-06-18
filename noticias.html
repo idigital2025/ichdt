@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Noticias y Actividades — Instituto Chileno de Derecho Tributario. Últimas publicaciones, seminarios y eventos del ICHDT." />
+  <title>Noticias y Actividades — ICHDT</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary":                "#044D8C",
+            "secondary":              "#1BCBF2",
+            "background":             "#FDFDFD",
+            "surface":                "#FFFFFF",
+            "on-surface":             "#1A1C1E",
+            "on-surface-variant":     "#44474E",
+            "outline-variant":        "#E1E2E8",
+            "surface-container-low":  "#F7F9FC",
+          },
+          fontFamily: {
+            "headline": ["Libre Caslon Text", "serif"],
+            "body":     ["Open Sans", "sans-serif"],
+          },
+          maxWidth: {
+            "site": "1280px",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ─── Material Icons ─────────────────────────────────────── */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ─── Scroll reveal ──────────────────────────────────────── */
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .section-reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── Nav underline hover ────────────────────────────────── */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 2px;
+      bottom: -4px; left: 0;
+      background-color: #044D8C;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── Decoración línea bajo títulos ──────────────────────── */
+    .title-bar {
+      display: block;
+      width: 72px; height: 3px;
+      background-color: #1BCBF2;
+      border-radius: 99px;
+      margin-top: 14px;
+    }
+
+    /* ─── Sombra y hover tarjetas ────────────────────────────── */
+    .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); }
+    .card-hover { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px -10px rgba(0,0,0,0.12);
+    }
+
+    /* ─── Scroll to top ──────────────────────────────────────── */
+    #btn-top { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    #btn-top.visible { opacity: 1; visibility: visible; }
+
+    /* ─── Mobile menu ────────────────────────────────────────── */
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    #mobile-menu.open { max-height: 400px; }
+
+    /* ─── Hero interno ───────────────────────────────────────── */
+    .page-hero {
+      min-height: 360px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    /* ─── Badge de categoría ─────────────────────────────────── */
+    .cat-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 99px;
+      line-height: 1;
+    }
+    .cat-noticias { background: #1BCBF2; color: #fff; }
+    .cat-eventos  { background: #044D8C; color: #fff; }
+
+    /* ─── Filtro categorías ──────────────────────────────────── */
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1.5px solid #E1E2E8;
+      background: white;
+      color: #44474E;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #044D8C;
+      color: white;
+      border-color: #044D8C;
+    }
+
+    /* ─── Card noticia ───────────────────────────────────────── */
+    .news-card { display: flex; flex-direction: column; }
+    .news-card .card-img {
+      width: 100%; height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+    .news-card .card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .news-card:hover .card-img img { transform: scale(1.04); }
+    .news-card .card-body { flex: 1; display: flex; flex-direction: column; }
+
+    /* ─── Card destacada (featured) ──────────────────────────── */
+    .featured-card .card-img { height: 420px; }
+
+    /* ─── Lightbox galería ───────────────────────────────────── */
+    #lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.9);
+      align-items: center; justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw; max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    #lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      color: white; font-size: 36px; cursor: pointer;
+      line-height: 1; background: none; border: none;
+    }
+    #lightbox-prev,
+    #lightbox-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.12);
+      border: none; color: white;
+      width: 48px; height: 48px;
+      border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease;
+    }
+    #lightbox-prev:hover,
+    #lightbox-next:hover { background: rgba(27,203,242,0.5); }
+    #lightbox-prev { left: 16px; }
+    #lightbox-next { right: 16px; }
+    #lightbox-counter {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.6); font-size: 13px;
+    }
+
+    /* ─── Thumbnails galería ─────────────────────────────────── */
+    .gallery-thumb {
+      width: 100%; aspect-ratio: 4/3;
+      overflow: hidden; border-radius: 12px; cursor: pointer;
+    }
+    .gallery-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-thumb:hover img { transform: scale(1.06); }
+
+    /* ─── Iframe responsive (video) ──────────────────────────── */
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: 16px;
+    }
+    .video-wrapper iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: 0;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-secondary/30">
+
+<!-- ════════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════ -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 bg-white border-b border-outline-variant/50 transition-shadow duration-300">
+  <div class="max-w-site mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-20 py-3">
+
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-10 sm:h-14 w-auto object-contain" />
+    </a>
+
+    <nav class="hidden md:flex gap-8 items-center">
+      <a href="index.html"          class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Inicio</a>
+      <a href="quienes-somos.html"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Quiénes Somos</a>
+      <a href="noticias.html"       class="nav-link text-primary font-bold text-sm tracking-wide">Noticias</a>
+      <a href="index.html#red"      class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Publicaciones</a>
+      <a href="index.html#contacto" class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Contacto</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <a href="index.html#contacto" class="hidden md:inline-flex bg-secondary text-white px-7 py-2.5 font-bold text-sm rounded-full hover:opacity-90 hover:shadow-lg transition-all active:scale-95">
+        Hazte Socio
+      </a>
+      <button id="btn-menu" class="md:hidden p-2 rounded-lg hover:bg-surface-container-low transition-colors" aria-label="Abrir menú">
+        <span class="material-symbols-outlined text-primary">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-outline-variant/40">
+    <nav class="flex flex-col px-6 py-4 gap-4">
+      <a href="index.html"          class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Inicio</a>
+      <a href="quienes-somos.html"  class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Quiénes Somos</a>
+      <a href="noticias.html"       class="font-semibold text-sm text-primary py-1">Noticias</a>
+      <a href="index.html#red"      class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Publicaciones</a>
+      <a href="index.html#contacto" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Contacto</a>
+      <a href="index.html#contacto" class="bg-secondary text-white text-center px-6 py-2.5 font-bold text-sm rounded-full mt-2">Hazte Socio</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════════════════════ -->
+<main class="mt-[64px] sm:mt-[72px]">
+
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <section class="page-hero bg-primary overflow-hidden" aria-label="Noticias y Actividades">
+    <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20 pb-12 pt-20 w-full">
+      <p class="text-secondary text-xs font-black uppercase tracking-widest mb-3">Instituto Chileno de Derecho Tributario</p>
+      <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
+        Noticias<br class="hidden sm:block" /> y Actividades
+      </h1>
+      <span class="block w-20 h-1 bg-secondary rounded-full mt-5"></span>
+      <p class="text-blue-100/80 text-base md:text-lg font-light mt-5 max-w-xl">
+        Revisa las últimas publicaciones, seminarios y actividades del Instituto.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ── NOTICIA DESTACADA ─────────────────────────────────────── -->
+  <section class="py-14 md:py-20 bg-background section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+
+      <p class="text-xs font-black uppercase tracking-widest text-secondary mb-3">Última noticia</p>
+      <h2 class="font-headline text-2xl sm:text-3xl font-bold text-primary mb-8">Lo más reciente</h2>
+
+      <!-- Featured card horizontal -->
+      <article class="bg-white rounded-3xl overflow-hidden card-shadow grid md:grid-cols-2 gap-0 card-hover featured-card" data-category="eventos">
+        <div class="card-img md:h-full min-h-[260px]">
+          <img
+            src="https://ichdt.cl/download/index/imagenactividadweb/id/171/key/a4a042cf4fd6bfb47701cbc8a1653ada"
+            alt="V Jornadas ICHDT Justicia Tributaria"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'"
+          />
+        </div>
+        <div class="p-8 md:p-10 flex flex-col justify-center gap-5">
+          <div class="flex items-center gap-3">
+            <span class="cat-badge cat-eventos">Eventos</span>
+            <span class="text-on-surface-variant/50 text-xs">·</span>
+            <time class="text-secondary text-[11px] font-black uppercase tracking-widest">Junio 05, 2026</time>
+          </div>
+          <h3 class="font-headline text-2xl md:text-3xl font-bold text-primary leading-snug">
+            V Jornadas del Instituto Chileno de Derecho Tributario | Justicia Tributaria
+          </h3>
+          <p class="text-on-surface-variant text-base font-light leading-relaxed">
+            Compartimos algunas imágenes de las "V Jornadas del ICHDT: Justicia Tributaria", realizadas el 2 de junio en la Facultad de Derecho, Universidad de Chile. Un espacio de reflexión y análisis sobre los desafíos actuales de la justicia tributaria.
+          </p>
+          <div class="flex items-center gap-4 mt-2">
+            <a href="noticia-84.html" class="inline-flex items-center gap-2 text-primary font-bold text-sm hover:text-secondary transition-colors group">
+              Leer más
+              <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+            <span class="text-outline-variant text-xs">por ICHDT</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ── ARCHIVO DE NOTICIAS ───────────────────────────────────── -->
+  <section class="pb-20 bg-surface-container-low section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+
+      <!-- Filtro categorías -->
+      <div class="flex flex-wrap gap-2 mb-10 pt-4" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="noticias">Noticias</button>
+        <button class="filter-btn" data-filter="eventos">Eventos</button>
+      </div>
+
+      <!-- Grid noticias -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="news-grid">
+
+        <!-- Noticia 84 → galería -->
+        <article class="bg-white rounded-2xl overflow-hidden card-shadow card-hover news-card" data-category="eventos">
+          <div class="card-img">
+            <div class="absolute top-3 left-3 z-10">
+              <span class="cat-badge cat-eventos">Eventos</span>
+            </div>
+            <img
+              src="https://ichdt.cl/download/index/imagenactividadweb/id/171/key/a4a042cf4fd6bfb47701cbc8a1653ada"
+              alt="V Jornadas ICHDT Justicia Tributaria"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body p-6 gap-3">
+            <time class="text-secondary text-[11px] font-black uppercase tracking-widest">Junio 05, 2026</time>
+            <h3 class="font-headline text-lg font-bold text-primary leading-snug mt-1">
+              V Jornadas del ICHDT | Justicia Tributaria
+            </h3>
+            <p class="text-on-surface-variant text-sm font-light leading-relaxed flex-1 mt-1">
+              Imágenes del evento realizado el 2 de junio en la Facultad de Derecho, Universidad de Chile.
+            </p>
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant/40">
+              <a href="noticia-84.html" class="inline-flex items-center gap-1.5 text-primary font-bold text-sm hover:text-secondary transition-colors group">
+                Leer más
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="flex items-center gap-1 text-on-surface-variant/40 text-xs">
+                <span class="material-symbols-outlined" style="font-size:14px">photo_library</span>
+                20 fotos
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Noticia 83 → video -->
+        <article class="bg-white rounded-2xl overflow-hidden card-shadow card-hover news-card" data-category="noticias">
+          <div class="card-img relative">
+            <div class="absolute top-3 left-3 z-10">
+              <span class="cat-badge cat-noticias">Noticias</span>
+            </div>
+            <!-- Play overlay -->
+            <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+              <div class="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                <span class="material-symbols-outlined text-primary" style="font-size:28px;font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">play_arrow</span>
+              </div>
+            </div>
+            <img
+              src="https://ichdt.cl/download/index/imagenactividad/id/160/key/b73ce398c39f506af761d2277d853a92"
+              alt="Video V Jornadas ICHDT"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body p-6 gap-3">
+            <time class="text-secondary text-[11px] font-black uppercase tracking-widest">Junio 05, 2026</time>
+            <h3 class="font-headline text-lg font-bold text-primary leading-snug mt-1">
+              Video de las V Jornadas del ICHDT
+            </h3>
+            <p class="text-on-surface-variant text-sm font-light leading-relaxed flex-1 mt-1">
+              Video resumen de las V Jornadas, organizadas junto a la Facultad de Derecho, Universidad de Chile.
+            </p>
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant/40">
+              <a href="noticia-83.html" class="inline-flex items-center gap-1.5 text-primary font-bold text-sm hover:text-secondary transition-colors group">
+                Ver video
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="flex items-center gap-1 text-on-surface-variant/40 text-xs">
+                <span class="material-symbols-outlined" style="font-size:14px">videocam</span>
+                Resumen
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Noticia 81 → programa -->
+        <article class="bg-white rounded-2xl overflow-hidden card-shadow card-hover news-card" data-category="eventos">
+          <div class="card-img relative">
+            <div class="absolute top-3 left-3 z-10">
+              <span class="cat-badge cat-eventos">Eventos</span>
+            </div>
+            <img
+              src="https://ichdt.cl/download/index/imagenactividad/id/143/key/903ce9225fca3e988c2af215d4e544d3"
+              alt="Programa V Jornadas ICHDT 2026"
+              loading="lazy"
+              onerror="this.src='https://ichdt.cl/download/index/imagenactividad/id/160/key/b73ce398c39f506af761d2277d853a92'"
+            />
+          </div>
+          <div class="card-body p-6 gap-3">
+            <time class="text-secondary text-[11px] font-black uppercase tracking-widest">Mayo 27, 2026</time>
+            <h3 class="font-headline text-lg font-bold text-primary leading-snug mt-1">
+              Programa: V Jornadas ICHDT — Justicia Tributaria
+            </h3>
+            <p class="text-on-surface-variant text-sm font-light leading-relaxed flex-1 mt-1">
+              Aula Magna, Facultad de Derecho, Universidad de Chile. 2 de junio de 2026, 9:00–19:00 hrs.
+            </p>
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant/40">
+              <a href="noticia-81.html" class="inline-flex items-center gap-1.5 text-primary font-bold text-sm hover:text-secondary transition-colors group">
+                Ver programa
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="flex items-center gap-1 text-on-surface-variant/40 text-xs">
+                <span class="material-symbols-outlined" style="font-size:14px">event</span>
+                Agenda
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Noticia 80 → convocatoria -->
+        <article class="bg-white rounded-2xl overflow-hidden card-shadow card-hover news-card" data-category="noticias">
+          <div class="card-img relative">
+            <div class="absolute top-3 left-3 z-10">
+              <span class="cat-badge cat-noticias">Noticias</span>
+            </div>
+            <img
+              src="https://ichdt.cl/download/index/imagenactividadweb/id/160/key/b73ce398c39f506af761d2277d853a92"
+              alt="Convocatoria V Jornadas ICHDT"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body p-6 gap-3">
+            <time class="text-secondary text-[11px] font-black uppercase tracking-widest">Mayo 19, 2026</time>
+            <h3 class="font-headline text-lg font-bold text-primary leading-snug mt-1">
+              Jornadas del ICHDT abordarán los desafíos de la Justicia Tributaria
+            </h3>
+            <p class="text-on-surface-variant text-sm font-light leading-relaxed flex-1 mt-1">
+              El ICHDT, junto a la Facultad de Derecho de la U. de Chile, invita a la quinta edición de sus Jornadas anuales. Actividad gratuita con cupos limitados.
+            </p>
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant/40">
+              <a href="noticia-80.html" class="inline-flex items-center gap-1.5 text-primary font-bold text-sm hover:text-secondary transition-colors group">
+                Leer más
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="flex items-center gap-1 text-on-surface-variant/40 text-xs">
+                <span class="material-symbols-outlined" style="font-size:14px">person</span>
+                ICHDT
+              </span>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /grid -->
+
+      <!-- Paginador -->
+      <nav class="flex justify-center items-center gap-2 mt-14" aria-label="Paginación de noticias">
+        <button disabled class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant/40 cursor-not-allowed">
+          <span class="material-symbols-outlined" style="font-size:18px">chevron_left</span>
+        </button>
+        <button class="w-10 h-10 rounded-full bg-primary text-white font-bold text-sm flex items-center justify-center" aria-current="page">1</button>
+        <button class="w-10 h-10 rounded-full border border-outline-variant text-on-surface-variant font-bold text-sm hover:border-primary hover:text-primary transition-colors flex items-center justify-center">2</button>
+        <button class="w-10 h-10 rounded-full border border-outline-variant text-on-surface-variant font-bold text-sm hover:border-primary hover:text-primary transition-colors flex items-center justify-center">3</button>
+        <span class="text-on-surface-variant/40 text-sm px-1">…</span>
+        <button class="w-10 h-10 rounded-full border border-outline-variant text-on-surface-variant font-bold text-sm hover:border-primary hover:text-primary transition-colors flex items-center justify-center">9</button>
+        <button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
+          <span class="material-symbols-outlined" style="font-size:18px">chevron_right</span>
+        </button>
+      </nav>
+
+      <!-- Sin resultados -->
+      <div id="no-results" class="hidden text-center py-16">
+        <span class="material-symbols-outlined text-primary/20" style="font-size:64px">search_off</span>
+        <p class="text-on-surface-variant font-light mt-4">No hay noticias en esta categoría aún.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     LIGHTBOX (accesible para galería)
+════════════════════════════════════════════════════════════ -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Galería de imágenes">
+  <button id="lightbox-close" aria-label="Cerrar galería">&times;</button>
+  <button id="lightbox-prev" aria-label="Imagen anterior">
+    <span class="material-symbols-outlined">chevron_left</span>
+  </button>
+  <img id="lightbox-img" src="" alt="" />
+  <button id="lightbox-next" aria-label="Imagen siguiente">
+    <span class="material-symbols-outlined">chevron_right</span>
+  </button>
+  <span id="lightbox-counter"></span>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════ -->
+<footer id="site-footer" class="bg-primary text-white pt-12 md:pt-20 pb-8 overflow-hidden relative">
+  <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+
+      <div class="space-y-6 lg:col-span-1">
+        <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-16 w-auto object-contain brightness-0 invert" />
+        <p class="text-blue-200/80 font-light text-sm leading-relaxed">
+          Instituto Chileno de Derecho Tributario<br/>
+          65 años promoviendo el estudio y desarrollo del Derecho Tributario en Chile.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Menú rápido</h4>
+        <ul class="space-y-3">
+          <li><a href="index.html"          class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Inicio</a></li>
+          <li><a href="quienes-somos.html"  class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Quiénes Somos</a></li>
+          <li><a href="noticias.html"       class="text-white text-sm font-semibold transition-colors hover:pl-1 block">Noticias</a></li>
+          <li><a href="index.html#contacto" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Hazte Socio</a></li>
+          <li><a href="index.html#contacto" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Contacto</h4>
+        <ul class="space-y-4 text-blue-200/70 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">location_on</span>
+            Av. Apoquindo 1234, Las Condes, Santiago
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0">mail</span>
+            contacto@ichdt.cl
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0">call</span>
+            +56 2 2234 5678
+          </li>
+        </ul>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Síguenos</h4>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="white" aria-hidden="true"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter/X" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">share</span>
+          </a>
+          <a href="#" aria-label="YouTube" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">play_circle</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-blue-200/40 text-[11px] font-bold uppercase tracking-widest">
+        © 2026 Instituto Chileno de Derecho Tributario. Todos los derechos reservados.
+      </p>
+      <div class="flex gap-5 text-[11px] font-bold text-blue-200/40 uppercase tracking-widest">
+        <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
+        <span>|</span>
+        <a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Botón volver arriba -->
+<button
+  id="btn-top"
+  onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-8 right-8 z-50 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all focus:outline-none"
+  aria-label="Volver al inicio"
+>
+  <span class="material-symbols-outlined text-2xl">arrow_upward</span>
+</button>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════════════ -->
+<script>
+  /* ── Header shadow on scroll ── */
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-md', window.scrollY > 10);
+    document.getElementById('btn-top').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  /* ── Mobile menu ── */
+  document.getElementById('btn-menu').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+
+  /* ── Scroll reveal ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
+
+  /* ── Filtro categorías ── */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const newsCards  = document.querySelectorAll('#news-grid article');
+  const noResults  = document.getElementById('no-results');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      let visible = 0;
+      newsCards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      noResults.classList.toggle('hidden', visible > 0);
+    });
+  });
+
+  /* ── Lightbox (para uso en páginas de detalle con galería) ── */
+  let lbImages = [], lbIndex = 0;
+
+  function openLightbox(imgs, idx) {
+    lbImages = imgs; lbIndex = idx;
+    showLbImage();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function showLbImage() {
+    document.getElementById('lightbox-img').src = lbImages[lbIndex];
+    document.getElementById('lightbox-counter').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-prev').addEventListener('click', () => {
+    lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+    showLbImage();
+  });
+  document.getElementById('lightbox-next').addEventListener('click', () => {
+    lbIndex = (lbIndex + 1) % lbImages.length;
+    showLbImage();
+  });
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; showLbImage(); }
+    if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbImages.length; showLbImage(); }
+  });
+</script>
+
+</body>
+</html>
