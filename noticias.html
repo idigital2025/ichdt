@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="es">
+<html class="light" lang="es" style="scroll-behavior:smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -123,26 +123,31 @@
     .cat-noticias { background: #1BCBF2; color: #fff; }
     .cat-eventos  { background: #044D8C; color: #fff; }
 
-    /* ─── Filtro categorías ──────────────────────────────────── */
+    /* ─── Filtro categorías (dentro del hero azul) ───────────── */
     .filter-btn {
-      padding: 8px 20px;
+      padding: 8px 22px;
       border-radius: 99px;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      border: 1.5px solid #E1E2E8;
-      background: white;
-      color: #44474E;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.75);
       cursor: pointer;
       transition: all 0.2s ease;
       white-space: nowrap;
+      backdrop-filter: blur(4px);
     }
-    .filter-btn:hover,
+    .filter-btn:hover {
+      background: rgba(255,255,255,0.20);
+      border-color: rgba(255,255,255,0.6);
+      color: #fff;
+    }
     .filter-btn.active {
-      background: #044D8C;
-      color: white;
-      border-color: #044D8C;
+      background: #1BCBF2;
+      border-color: #1BCBF2;
+      color: #fff;
     }
 
     /* ─── Card noticia ───────────────────────────────────────── */
@@ -271,8 +276,8 @@
 <main class="mt-[64px] sm:mt-[72px]">
 
   <!-- ── HERO ─────────────────────────────────────────────────── -->
-  <section class="page-hero bg-primary overflow-hidden" aria-label="Noticias y Actividades">
-    <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20 pb-12 pt-20 w-full">
+  <section class="bg-primary overflow-hidden relative" aria-label="Noticias y Actividades">
+    <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20 pt-16 pb-6 w-full">
       <p class="text-secondary text-xs font-black uppercase tracking-widest mb-3">Instituto Chileno de Derecho Tributario</p>
       <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
         Noticias<br class="hidden sm:block" /> y Actividades
@@ -281,7 +286,19 @@
       <p class="text-blue-100/80 text-base md:text-lg font-light mt-5 max-w-xl">
         Revisa las últimas publicaciones, seminarios y actividades del Instituto.
       </p>
+
+      <!-- Filtros como acceso rápido dentro del hero -->
+      <div class="flex flex-wrap gap-3 mt-8">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="noticias">Noticias</button>
+        <button class="filter-btn" data-filter="eventos">Eventos</button>
+      </div>
     </div>
+
+    <!-- Onda de corte inferior -->
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-12 md:h-16 block">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FDFDFD"/>
+    </svg>
   </section>
 
 
@@ -332,12 +349,8 @@
   <section class="pb-20 bg-surface-container-low section-reveal">
     <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
 
-      <!-- Filtro categorías -->
-      <div class="flex flex-wrap gap-2 mb-10 pt-4" id="filter-bar">
-        <button class="filter-btn active" data-filter="all">Todas</button>
-        <button class="filter-btn" data-filter="noticias">Noticias</button>
-        <button class="filter-btn" data-filter="eventos">Eventos</button>
-      </div>
+      <!-- Espacio superior grid -->
+      <div class="pt-2" id="filter-bar"></div>
 
       <!-- Grid noticias -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="news-grid">

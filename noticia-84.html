@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html class="light" lang="es" style="scroll-behavior:smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="V Jornadas del Instituto Chileno de Derecho Tributario: Justicia Tributaria — 2 de junio de 2026, Facultad de Derecho, Universidad de Chile." />
+  <title>V Jornadas ICHDT | Justicia Tributaria — ICHDT</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary":               "#044D8C",
+            "secondary":             "#1BCBF2",
+            "background":            "#FDFDFD",
+            "surface":               "#FFFFFF",
+            "on-surface":            "#1A1C1E",
+            "on-surface-variant":    "#44474E",
+            "outline-variant":       "#E1E2E8",
+            "surface-container-low": "#F7F9FC",
+          },
+          fontFamily: {
+            "headline": ["Libre Caslon Text", "serif"],
+            "body":     ["Open Sans", "sans-serif"],
+          },
+          maxWidth: { "site": "1280px" },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ─── Nav ─── */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute;
+      width: 0; height: 2px; bottom: -4px; left: 0;
+      background-color: #044D8C; transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── Mobile menu ─── */
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    #mobile-menu.open { max-height: 400px; }
+
+    /* ─── Scroll to top ─── */
+    #btn-top { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    #btn-top.visible { opacity: 1; visibility: visible; }
+
+    /* ─── Scroll reveal ─── */
+    .section-reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .section-reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── Decoración ─── */
+    .title-bar { display: block; width: 72px; height: 3px; background: #1BCBF2; border-radius: 99px; margin-top: 14px; }
+    .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); }
+
+    /* ─── Badge categoría ─── */
+    .cat-badge {
+      display: inline-block; font-size: 10px; font-weight: 900;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 99px; line-height: 1;
+    }
+    .cat-eventos  { background: #044D8C; color: #fff; }
+    .cat-noticias { background: #1BCBF2; color: #fff; }
+
+    /* ─── Hero azul (sin foto) ─── */
+    .article-hero {
+      background: #044D8C;
+      min-height: 260px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decoración geométrica sutil */
+    .article-hero::before {
+      content: '';
+      position: absolute;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: rgba(27,203,242,0.07);
+      top: -160px; right: -80px;
+      pointer-events: none;
+    }
+    .article-hero::after {
+      content: '';
+      position: absolute;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      bottom: -100px; left: 5%;
+      pointer-events: none;
+    }
+
+    /* ─── Cuerpo artículo ─── */
+    .article-body { font-size: 1.0625rem; line-height: 1.85; color: #44474E; }
+    .article-body p { margin-bottom: 1.4em; }
+    .article-body strong { color: #1A1C1E; }
+
+    /* ══════════════════════════════════════════
+       CARRUSEL
+    ══════════════════════════════════════════ */
+
+    /* Contenedor externo: solo posiciona las flechas */
+    .carousel-wrap {
+      position: relative;
+      padding: 0 32px;   /* espacio para las flechas laterales */
+    }
+    @media (max-width: 640px) {
+      .carousel-wrap { padding: 0; }
+    }
+
+    /* Caja interna: aplica bordes redondeados y recorta todo */
+    .carousel-inner {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 32px -6px rgba(4,77,140,0.12);
+      border: 1px solid #E1E2E8;
+    }
+
+    /* Pantalla principal */
+    .carousel-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/2;
+      background: #f4f7fb;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) {
+      .carousel-stage { aspect-ratio: 4/3; }
+    }
+
+    .carousel-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .carousel-slide.active { opacity: 1; pointer-events: auto; }
+
+    /* object-fit: cover rellena sin dejar espacios vacíos */
+    .carousel-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* Flechas — a los costados del carousel-inner */
+    .car-btn {
+      position: absolute; top: calc(50% - 28px); transform: translateY(-50%);
+      z-index: 10;
+      background: #fff;
+      border: 1.5px solid #E1E2E8;
+      cursor: pointer; color: #044D8C;
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 10px rgba(4,77,140,0.10);
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .car-btn:hover {
+      background: #1BCBF2; color: #fff; border-color: #1BCBF2;
+      transform: translateY(-50%) scale(1.08);
+    }
+    .car-btn.prev { left: 0; }
+    .car-btn.next { right: 0; }
+    @media (max-width: 640px) {
+      .car-btn {
+        top: calc(50% - 28px);
+        width: 36px; height: 36px;
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(4px);
+      }
+      .car-btn.prev { left: 8px; }
+      .car-btn.next { right: 8px; }
+    }
+
+    /* Contador */
+    .car-counter {
+      position: absolute; bottom: 12px; right: 14px; z-index: 10;
+      background: rgba(4,77,140,0.65); color: #fff;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 3px 11px; border-radius: 99px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Tira de miniaturas */
+    .carousel-thumbs {
+      display: flex;
+      gap: 8px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #1BCBF2 transparent;
+      background: #fff;
+      border-top: 1px solid #E1E2E8;
+    }
+    .carousel-thumbs::-webkit-scrollbar { height: 3px; }
+    .carousel-thumbs::-webkit-scrollbar-thumb { background: #1BCBF2; border-radius: 99px; }
+
+    .car-thumb {
+      flex-shrink: 0;
+      width: 76px; height: 54px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s ease, opacity 0.2s ease;
+      opacity: 0.5;
+    }
+    @media (max-width: 480px) {
+      .car-thumb { width: 60px; height: 44px; }
+    }
+    .car-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .car-thumb.active { border-color: #1BCBF2; opacity: 1; box-shadow: 0 0 0 3px rgba(27,203,242,0.2); }
+    .car-thumb:hover:not(.active) { opacity: 0.8; border-color: #044D8C; }
+
+    /* Dots (mobile) */
+    .car-dots {
+      display: none;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 0 6px;
+      background: #fff;
+      border-top: 1px solid #E1E2E8;
+    }
+    @media (max-width: 640px) { .car-dots { display: flex; flex-wrap: wrap; } }
+    .car-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #DCE8F5; cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+      border: none;
+    }
+    .car-dot.active { background: #044D8C; transform: scale(1.4); }
+
+    /* ─── Tarjetas relacionadas ─── */
+    .related-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .related-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px -10px rgba(0,0,0,0.12);
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-secondary/30">
+
+<!-- ════════════════ HEADER ════════════════ -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 bg-white border-b border-outline-variant/50 transition-shadow duration-300">
+  <div class="max-w-site mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-20 py-3">
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-10 sm:h-14 w-auto object-contain" />
+    </a>
+    <nav class="hidden md:flex gap-8 items-center">
+      <a href="index.html"          class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Inicio</a>
+      <a href="quienes-somos.html"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Quiénes Somos</a>
+      <a href="noticias.html"       class="nav-link text-primary font-bold text-sm tracking-wide">Noticias</a>
+      <a href="index.html#red"      class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Publicaciones</a>
+      <a href="index.html#contacto" class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Contacto</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <a href="index.html#contacto" class="hidden md:inline-flex bg-secondary text-white px-7 py-2.5 font-bold text-sm rounded-full hover:opacity-90 hover:shadow-lg transition-all active:scale-95">
+        Hazte Socio
+      </a>
+      <button id="btn-menu" class="md:hidden p-2 rounded-lg hover:bg-surface-container-low transition-colors" aria-label="Abrir menú">
+        <span class="material-symbols-outlined text-primary">menu</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-outline-variant/40">
+    <nav class="flex flex-col px-6 py-4 gap-4">
+      <a href="index.html"          class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Inicio</a>
+      <a href="quienes-somos.html"  class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Quiénes Somos</a>
+      <a href="noticias.html"       class="font-semibold text-sm text-primary py-1">Noticias</a>
+      <a href="index.html#red"      class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Publicaciones</a>
+      <a href="index.html#contacto" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Contacto</a>
+      <a href="index.html#contacto" class="bg-secondary text-white text-center px-6 py-2.5 font-bold text-sm rounded-full mt-2">Hazte Socio</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════════════════ MAIN ════════════════ -->
+<main class="mt-[64px] sm:mt-[72px]">
+
+  <!-- ── HERO AZUL ──────────────────────────────────────────────── -->
+  <div class="article-hero">
+    <div class="relative z-10 max-w-site mx-auto w-full px-4 sm:px-6 lg:px-20 pb-10 pt-14 sm:pt-16">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-1.5 text-xs font-semibold text-blue-200/60 mb-5 flex-wrap" aria-label="Ruta de navegación">
+        <a href="index.html" class="hover:text-white transition-colors">Inicio</a>
+        <span class="material-symbols-outlined" style="font-size:14px">chevron_right</span>
+        <a href="noticias.html" class="hover:text-white transition-colors">Noticias</a>
+        <span class="material-symbols-outlined" style="font-size:14px">chevron_right</span>
+        <span class="text-white/80">V Jornadas ICHDT</span>
+      </nav>
+
+      <div class="flex flex-wrap items-center gap-3 mb-4">
+        <span class="cat-badge cat-eventos">Eventos</span>
+        <time class="text-secondary text-[11px] font-black uppercase tracking-widest">Junio 05, 2026</time>
+        <span class="text-white/30">·</span>
+        <span class="text-blue-200/60 text-xs">por ICHDT</span>
+      </div>
+
+      <h1 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight max-w-3xl">
+        V Jornadas del Instituto Chileno de Derecho Tributario | Justicia Tributaria
+      </h1>
+      <span class="block w-20 h-1 bg-secondary rounded-full mt-5"></span>
+    </div>
+  </div>
+
+
+  <!-- ── CONTENIDO ─────────────────────────────────────────────── -->
+  <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20 py-10 md:py-14">
+    <div class="grid lg:grid-cols-[1fr_300px] gap-10 xl:gap-16">
+
+      <!-- ── Columna principal ── -->
+      <article>
+
+        <!-- Cuerpo -->
+        <div class="article-body mb-8">
+          <p>
+            Compartimos algunas imágenes de las <strong>"V Jornadas del Instituto Chileno de Derecho Tributario: Justicia Tributaria"</strong>, realizadas el pasado 2 de junio en la Facultad de Derecho de la Universidad de Chile.
+          </p>
+          <p>
+            Agradecemos a todos los expositores, moderadores, autoridades y asistentes que fueron parte de esta instancia de reflexión y análisis sobre los desafíos actuales de la justicia tributaria en nuestro país.
+          </p>
+        </div>
+
+        <!-- Compartir -->
+        <div class="flex items-center gap-3 py-5 border-t border-b border-outline-variant/50 mb-10">
+          <span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60 mr-1">Compartir</span>
+          <a href="#" aria-label="Compartir en LinkedIn" class="w-9 h-9 rounded-full bg-primary/6 flex items-center justify-center hover:bg-primary hover:text-white transition-all text-primary">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+          </a>
+          <a href="#" aria-label="Compartir en Twitter/X" class="w-9 h-9 rounded-full bg-primary/6 flex items-center justify-center hover:bg-primary hover:text-white transition-all text-primary">
+            <span class="material-symbols-outlined" style="font-size:15px">share</span>
+          </a>
+          <a href="#" aria-label="Copiar enlace" class="w-9 h-9 rounded-full bg-primary/6 flex items-center justify-center hover:bg-primary hover:text-white transition-all text-primary">
+            <span class="material-symbols-outlined" style="font-size:15px">link</span>
+          </a>
+        </div>
+
+        <!-- ══ CARRUSEL ══════════════════════════════════════════ -->
+        <section class="section-reveal mb-10" aria-label="Galería fotográfica">
+
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <p class="text-xs font-black uppercase tracking-widest text-secondary mb-1">Registro fotográfico</p>
+              <h2 class="font-headline text-2xl font-bold text-primary">Galería de imágenes</h2>
+            </div>
+            <span class="text-on-surface-variant/50 text-sm font-semibold hidden sm:block">20 fotos</span>
+          </div>
+
+          <div class="carousel-wrap">
+
+            <!-- Flechas (fuera del inner para no quedar recortadas) -->
+            <button class="car-btn prev" id="carPrev" aria-label="Foto anterior">
+              <span class="material-symbols-outlined" style="font-size:22px">chevron_left</span>
+            </button>
+            <button class="car-btn next" id="carNext" aria-label="Foto siguiente">
+              <span class="material-symbols-outlined" style="font-size:22px">chevron_right</span>
+            </button>
+
+            <div class="carousel-inner">
+
+            <!-- Pantalla principal -->
+            <div class="carousel-stage" id="carStage">
+
+              <div class="carousel-slide active"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/171/key/a4a042cf4fd6bfb47701cbc8a1653ada" alt="Jornada ICHDT foto 1" loading="eager" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/180/key/045117b0e0a11a242b9765e79cbf113f" alt="Jornada ICHDT foto 2" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/179/key/8f53295a73878494e9bc8dd6c3c7104f" alt="Jornada ICHDT foto 3" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/178/key/8f85517967795eeef66c225f7883bdcb" alt="Jornada ICHDT foto 4" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/177/key/96da2f590cd7246bbde0051047b0d6f7" alt="Jornada ICHDT foto 5" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/176/key/38af86134b65d0f10fe33d30dd76442e" alt="Jornada ICHDT foto 6" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/175/key/82161242827b703e6acf9c726942a1e4" alt="Jornada ICHDT foto 7" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/174/key/bf8229696f7a3bb4700cfddef19fa23f" alt="Jornada ICHDT foto 8" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/173/key/f7e6c85504ce6e82442c770f7c8606f0" alt="Jornada ICHDT foto 9" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/172/key/1ff8a7b5dc7a7d1f0ed65aaa29c04b1e" alt="Jornada ICHDT foto 10" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/161/key/bd4c9ab730f5513206b999ec0d90d1fb" alt="Jornada ICHDT foto 11" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/170/key/149e9677a5989fd342ae44213df68868" alt="Jornada ICHDT foto 12" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/169/key/3636638817772e42b59d74cff571fbb3" alt="Jornada ICHDT foto 13" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/168/key/006f52e9102a8d3be2fe5614f42ba989" alt="Jornada ICHDT foto 14" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/167/key/5878a7ab84fb43402106c575658472fa" alt="Jornada ICHDT foto 15" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/166/key/7e7757b1e12abcb736ab9a754ffb617a" alt="Jornada ICHDT foto 16" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/165/key/9766527f2b5d3e95d4a733fcfb77bd7e" alt="Jornada ICHDT foto 17" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/164/key/fa7cdfad1a5aaf8370ebeda47a1ff1c3" alt="Jornada ICHDT foto 18" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/163/key/0777d5c17d4066b82ab86dff8a46af6f" alt="Jornada ICHDT foto 19" loading="lazy" /></div>
+              <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/162/key/82aa4b0af34c2313a562076992e50aa3" alt="Jornada ICHDT foto 20" loading="lazy" /></div>
+
+              <!-- Contador -->
+              <span class="car-counter" id="carCounter">1 / 20</span>
+            </div>
+
+            <!-- Miniaturas (desktop/tablet) -->
+            <div class="carousel-thumbs hidden sm:flex" id="carThumbs">
+              <div class="car-thumb active" onclick="goTo(0)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/171/key/a4a042cf4fd6bfb47701cbc8a1653ada" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(1)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/180/key/045117b0e0a11a242b9765e79cbf113f" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(2)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/179/key/8f53295a73878494e9bc8dd6c3c7104f" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(3)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/178/key/8f85517967795eeef66c225f7883bdcb" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(4)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/177/key/96da2f590cd7246bbde0051047b0d6f7" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(5)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/176/key/38af86134b65d0f10fe33d30dd76442e" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(6)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/175/key/82161242827b703e6acf9c726942a1e4" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(7)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/174/key/bf8229696f7a3bb4700cfddef19fa23f" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(8)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/173/key/f7e6c85504ce6e82442c770f7c8606f0" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(9)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/172/key/1ff8a7b5dc7a7d1f0ed65aaa29c04b1e" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(10)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/161/key/bd4c9ab730f5513206b999ec0d90d1fb" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(11)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/170/key/149e9677a5989fd342ae44213df68868" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(12)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/169/key/3636638817772e42b59d74cff571fbb3" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(13)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/168/key/006f52e9102a8d3be2fe5614f42ba989" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(14)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/167/key/5878a7ab84fb43402106c575658472fa" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(15)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/166/key/7e7757b1e12abcb736ab9a754ffb617a" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(16)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/165/key/9766527f2b5d3e95d4a733fcfb77bd7e" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(17)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/164/key/fa7cdfad1a5aaf8370ebeda47a1ff1c3" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(18)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/163/key/0777d5c17d4066b82ab86dff8a46af6f" alt="" /></div>
+              <div class="car-thumb" onclick="goTo(19)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/162/key/82aa4b0af34c2313a562076992e50aa3" alt="" /></div>
+            </div>
+
+            <!-- Dots (mobile) -->
+            </div><!-- /carousel-inner -->
+
+            <div class="car-dots" id="carDots"></div>
+          </div><!-- /carousel-wrap -->
+        </section>
+
+        <!-- Volver -->
+        <div class="pt-6 border-t border-outline-variant/50">
+          <a href="noticias.html" class="inline-flex items-center gap-2 text-primary font-bold text-sm hover:text-secondary transition-colors group">
+            <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform">arrow_back</span>
+            Volver a Noticias
+          </a>
+        </div>
+
+      </article>
+
+
+      <!-- ── Sidebar ─────────────────────────────────────────── -->
+      <aside class="space-y-6 lg:pt-0">
+
+        <!-- Noticias relacionadas -->
+        <div class="bg-surface-container-low rounded-2xl p-5 card-shadow">
+          <h3 class="font-headline text-base font-bold text-primary mb-4 pb-3 border-b border-outline-variant/50">Noticias relacionadas</h3>
+          <div class="space-y-4">
+
+            <a href="noticia-83.html" class="flex gap-3 group related-card block">
+              <div class="w-20 h-14 rounded-lg overflow-hidden shrink-0 bg-outline-variant/30">
+                <img src="https://ichdt.cl/download/index/imagenactividad/id/160/key/b73ce398c39f506af761d2277d853a92" alt="" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <time class="text-secondary text-[10px] font-black uppercase tracking-widest">Jun 05, 2026</time>
+                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">
+                  Video de las V Jornadas del ICHDT
+                </p>
+              </div>
+            </a>
+
+            <a href="noticia-81.html" class="flex gap-3 group related-card block">
+              <div class="w-20 h-14 rounded-lg overflow-hidden shrink-0 bg-outline-variant/30">
+                <img src="https://ichdt.cl/download/index/imagenactividad/id/143/key/903ce9225fca3e988c2af215d4e544d3" alt="" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <time class="text-secondary text-[10px] font-black uppercase tracking-widest">May 27, 2026</time>
+                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">
+                  Programa: V Jornadas ICHDT — Justicia Tributaria
+                </p>
+              </div>
+            </a>
+
+            <a href="noticia-80.html" class="flex gap-3 group related-card block">
+              <div class="w-20 h-14 rounded-lg overflow-hidden shrink-0 bg-outline-variant/30">
+                <img src="https://ichdt.cl/download/index/imagenactividadweb/id/160/key/b73ce398c39f506af761d2277d853a92" alt="" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <time class="text-secondary text-[10px] font-black uppercase tracking-widest">May 19, 2026</time>
+                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">
+                  Jornadas del ICHDT abordarán los desafíos de la Justicia Tributaria
+                </p>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- CTA Hazte Socio -->
+        <div class="bg-primary rounded-2xl p-6 text-white text-center">
+          <span class="material-symbols-outlined text-secondary mb-3 block" style="font-size:36px">groups</span>
+          <h3 class="font-headline text-lg font-bold mb-2">¿Quieres ser parte del ICHDT?</h3>
+          <p class="text-blue-200/70 text-sm font-light mb-5">Únete a la comunidad de profesionales del Derecho Tributario.</p>
+          <a href="index.html#contacto" class="inline-block bg-secondary text-white font-bold text-sm px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">
+            Hazte Socio
+          </a>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+</main>
+
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer id="site-footer" class="bg-primary text-white pt-12 md:pt-20 pb-8 overflow-hidden relative">
+  <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+  <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+
+      <div class="space-y-6">
+        <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-16 w-auto object-contain brightness-0 invert" />
+        <p class="text-blue-200/80 font-light text-sm leading-relaxed">
+          Instituto Chileno de Derecho Tributario<br/>
+          65 años promoviendo el estudio y desarrollo del Derecho Tributario en Chile.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Menú rápido</h4>
+        <ul class="space-y-3">
+          <li><a href="index.html"          class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Inicio</a></li>
+          <li><a href="quienes-somos.html"  class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Quiénes Somos</a></li>
+          <li><a href="noticias.html"       class="text-white text-sm font-semibold transition-colors hover:pl-1 block">Noticias</a></li>
+          <li><a href="index.html#contacto" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Hazte Socio</a></li>
+          <li><a href="index.html#contacto" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Contacto</h4>
+        <ul class="space-y-4 text-blue-200/70 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">location_on</span>
+            Av. Apoquindo 1234, Las Condes, Santiago
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0">mail</span>
+            contacto@ichdt.cl
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary text-lg shrink-0">call</span>
+            +56 2 2234 5678
+          </li>
+        </ul>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Síguenos</h4>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter/X" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">share</span>
+          </a>
+          <a href="#" aria-label="YouTube" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">play_circle</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-blue-200/40 text-[11px] font-bold uppercase tracking-widest">
+        © 2026 Instituto Chileno de Derecho Tributario. Todos los derechos reservados.
+      </p>
+      <div class="flex gap-5 text-[11px] font-bold text-blue-200/40 uppercase tracking-widest">
+        <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
+        <span>|</span>
+        <a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="btn-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-8 right-8 z-50 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all focus:outline-none"
+  aria-label="Volver al inicio">
+  <span class="material-symbols-outlined text-2xl">arrow_upward</span>
+</button>
+
+
+<!-- ════════════════ SCRIPTS ════════════════ -->
+<script>
+  /* ── Header ── */
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-md', window.scrollY > 10);
+    document.getElementById('btn-top').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  /* ── Mobile menu ── */
+  document.getElementById('btn-menu').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+
+  /* ── Scroll reveal ── */
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.section-reveal').forEach(el => revealObserver.observe(el));
+
+  /* ══ CARRUSEL ══════════════════════════════════════════════ */
+  const slides  = document.querySelectorAll('.carousel-slide');
+  const thumbs  = document.querySelectorAll('.car-thumb');
+  const counter = document.getElementById('carCounter');
+  const dotsWrap = document.getElementById('carDots');
+  const thumbsBar = document.getElementById('carThumbs');
+  let current = 0;
+  const total = slides.length;
+
+  /* Crear dots para mobile */
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'car-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Ir a foto ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  function goTo(idx) {
+    slides[current].classList.remove('active');
+    thumbs[current].classList.remove('active');
+    dotsWrap.children[current].classList.remove('active');
+
+    current = (idx + total) % total;
+
+    slides[current].classList.add('active');
+    thumbs[current].classList.add('active');
+    dotsWrap.children[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + total;
+
+    /* Scroll miniatura visible */
+    thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  document.getElementById('carPrev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('carNext').addEventListener('click', () => goTo(current + 1));
+
+  /* Teclado */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  /* Swipe táctil */
+  let touchStartX = 0;
+  const stage = document.getElementById('carStage');
+  stage.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  stage.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+  }, { passive: true });
+</script>
+
+</body>
+</html>

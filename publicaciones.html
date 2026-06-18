@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="light" lang="es" style="scroll-behavior:smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Publicaciones — Instituto Chileno de Derecho Tributario. Jurisprudencia, artículos y estudios sobre Derecho Tributario en Chile." />
+  <title>Publicaciones — ICHDT</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary":               "#044D8C",
+            "secondary":             "#1BCBF2",
+            "background":            "#FDFDFD",
+            "surface":               "#FFFFFF",
+            "on-surface":            "#1A1C1E",
+            "on-surface-variant":    "#44474E",
+            "outline-variant":       "#E1E2E8",
+            "surface-container-low": "#F7F9FC",
+          },
+          fontFamily: {
+            "headline": ["Libre Caslon Text", "serif"],
+            "body":     ["Open Sans", "sans-serif"],
+          },
+          maxWidth: { "site": "1280px" },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: #044D8C; transition: width 0.3s ease; }
+    .nav-link:hover::after { width: 100%; }
+
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    #mobile-menu.open { max-height: 400px; }
+
+    #btn-top { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    #btn-top.visible { opacity: 1; visibility: visible; }
+
+    .section-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+    .section-reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .title-bar { display: block; width: 72px; height: 3px; background: #1BCBF2; border-radius: 99px; margin-top: 14px; }
+    .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); }
+    .card-hover { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 14px 32px -10px rgba(0,0,0,0.12); }
+
+    /* ─── Badge categoría ─── */
+    .cat-badge { display: inline-block; font-size: 10px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; line-height: 1; }
+    .cat-jurisprudencia { background: #044D8C; color: #fff; }
+    .cat-articulos      { background: #1BCBF2; color: #fff; }
+    .cat-estudios       { background: #5DADE2; color: #fff; }
+
+    /* ─── Filtros hero ─── */
+    .filter-btn {
+      padding: 8px 22px; border-radius: 99px; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.75);
+      cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+      backdrop-filter: blur(4px);
+    }
+    .filter-btn:hover { background: rgba(255,255,255,0.20); border-color: rgba(255,255,255,0.6); color: #fff; }
+    .filter-btn.active { background: #1BCBF2; border-color: #1BCBF2; color: #fff; }
+
+    /* ─── Card publicación (horizontal) ─── */
+    .pub-card { display: grid; grid-template-columns: 180px 1fr; gap: 0; }
+    @media (max-width: 640px) { .pub-card { grid-template-columns: 1fr; } }
+    .pub-card .pub-img {
+      height: 100%; min-height: 160px;
+      overflow: hidden; background: #EEF4FB;
+    }
+    @media (max-width: 640px) { .pub-card .pub-img { height: 180px; } }
+    .pub-card .pub-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .pub-card:hover .pub-img img { transform: scale(1.04); }
+
+    /* Destacada */
+    .pub-featured { grid-template-columns: 280px 1fr; }
+    @media (max-width: 768px) { .pub-featured { grid-template-columns: 1fr; } }
+    .pub-featured .pub-img { min-height: 220px; }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-secondary/30">
+
+<!-- ════════════ HEADER ════════════ -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 bg-white border-b border-outline-variant/50 transition-shadow duration-300">
+  <div class="max-w-site mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-20 py-3">
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-10 sm:h-14 w-auto object-contain" />
+    </a>
+    <nav class="hidden md:flex gap-8 items-center">
+      <a href="index.html"           class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Inicio</a>
+      <a href="quienes-somos.html"   class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Quiénes Somos</a>
+      <a href="noticias.html"        class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Noticias</a>
+      <a href="publicaciones.html"   class="nav-link text-primary font-bold text-sm tracking-wide">Publicaciones</a>
+      <a href="index.html#contacto"  class="nav-link text-on-surface-variant font-semibold text-sm tracking-wide hover:text-primary transition-colors">Contacto</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <a href="index.html#contacto" class="hidden md:inline-flex bg-secondary text-white px-7 py-2.5 font-bold text-sm rounded-full hover:opacity-90 hover:shadow-lg transition-all active:scale-95">Hazte Socio</a>
+      <button id="btn-menu" class="md:hidden p-2 rounded-lg hover:bg-surface-container-low transition-colors" aria-label="Abrir menú">
+        <span class="material-symbols-outlined text-primary">menu</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-outline-variant/40">
+    <nav class="flex flex-col px-6 py-4 gap-4">
+      <a href="index.html"          class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Inicio</a>
+      <a href="quienes-somos.html"  class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Quiénes Somos</a>
+      <a href="noticias.html"       class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Noticias</a>
+      <a href="publicaciones.html"  class="font-semibold text-sm text-primary py-1">Publicaciones</a>
+      <a href="index.html#contacto" class="font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors py-1">Contacto</a>
+      <a href="index.html#contacto" class="bg-secondary text-white text-center px-6 py-2.5 font-bold text-sm rounded-full mt-2">Hazte Socio</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════════════ MAIN ════════════ -->
+<main class="mt-[64px] sm:mt-[72px]">
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <section class="bg-primary overflow-hidden relative" aria-label="Publicaciones ICHDT">
+    <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20 pt-16 pb-6 w-full">
+      <p class="text-secondary text-xs font-black uppercase tracking-widest mb-3">Instituto Chileno de Derecho Tributario</p>
+      <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">Publicaciones</h1>
+      <span class="block w-20 h-1 bg-secondary rounded-full mt-5"></span>
+      <p class="text-blue-100/80 text-base md:text-lg font-light mt-5 max-w-xl">
+        Jurisprudencia, artículos y estudios elaborados por los miembros del Instituto.
+      </p>
+      <!-- Filtros como acceso rápido -->
+      <div class="flex flex-wrap gap-3 mt-8">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="jurisprudencia">Jurisprudencia Judicial</button>
+        <button class="filter-btn" data-filter="articulos">Artículos</button>
+        <button class="filter-btn" data-filter="estudios">Estudios</button>
+      </div>
+    </div>
+    <!-- Onda de corte inferior -->
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-12 md:h-16 block">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FDFDFD"/>
+    </svg>
+  </section>
+
+
+  <!-- ── PUBLICACIÓN DESTACADA ─────────────────────────────── -->
+  <section class="py-14 md:py-20 bg-background section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+      <p class="text-xs font-black uppercase tracking-widest text-secondary mb-3">Última publicación</p>
+      <h2 class="font-headline text-2xl sm:text-3xl font-bold text-primary mb-8">Lo más reciente</h2>
+
+      <article class="bg-white rounded-3xl overflow-hidden card-shadow card-hover pub-card pub-featured" data-category="jurisprudencia">
+        <div class="pub-img">
+          <img
+            src="https://ichdt.cl/download/index/imagenpublicacionsmall/id/67/key/735b90b4568125ed6c3f678819b6e058"
+            alt="Sentencia Lionel Messi"
+            onerror="this.style.display='none'"
+          />
+        </div>
+        <div class="p-8 md:p-10 flex flex-col justify-center gap-4">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="cat-badge cat-jurisprudencia">Jurisprudencia Judicial</span>
+            <time class="text-secondary text-[11px] font-black uppercase tracking-widest">Julio 05, 2016</time>
+          </div>
+          <h3 class="font-headline text-2xl md:text-3xl font-bold text-primary leading-snug">
+            Sentencia Lionel Messi; Audiencia Provincial Barcelona
+          </h3>
+          <p class="text-on-surface-variant text-base font-light leading-relaxed">
+            Análisis de la sentencia dictada en contra de Lionel Messi por la Audiencia Provincial de Barcelona y su relación con las normas anti elusivas del ordenamiento tributario chileno.
+          </p>
+          <div class="flex items-center gap-4 mt-2">
+            <a href="publicacion-32.html" class="inline-flex items-center gap-2 text-primary font-bold text-sm hover:text-secondary transition-colors group">
+              Leer más
+              <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+            <span class="flex items-center gap-1.5 text-on-surface-variant/50 text-xs">
+              <span class="material-symbols-outlined" style="font-size:14px">person</span>
+              Guido Aguirre de la R.
+            </span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ── ARCHIVO DE PUBLICACIONES ──────────────────────────── -->
+  <section class="pb-20 bg-surface-container-low section-reveal">
+    <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-20">
+
+      <div class="pt-2" id="filter-bar"></div>
+
+      <!-- Lista publicaciones -->
+      <div class="flex flex-col gap-5" id="pub-grid">
+
+        <!-- Publicación 32 -->
+        <article class="bg-white rounded-2xl overflow-hidden card-shadow card-hover pub-card" data-category="jurisprudencia">
+          <div class="pub-img">
+            <img
+              src="https://ichdt.cl/download/index/imagenpublicacionsmall/id/67/key/735b90b4568125ed6c3f678819b6e058"
+              alt="Sentencia Lionel Messi"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            />
+          </div>
+          <div class="p-6 flex flex-col justify-between gap-3">
+            <div>
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <span class="cat-badge cat-jurisprudencia">Jurisprudencia Judicial</span>
+                <time class="text-secondary text-[11px] font-black uppercase tracking-widest">Julio 05, 2016</time>
+              </div>
+              <h3 class="font-headline text-lg font-bold text-primary leading-snug">
+                Sentencia Lionel Messi; Audiencia Provincial Barcelona
+              </h3>
+              <p class="text-on-surface-variant text-sm font-light leading-relaxed mt-2">
+                La sentencia de la Audiencia Provincial de Barcelona analizada en el contexto de las normas anti elusivas chilenas (artículos 4 bis, 4 quater y 100 bis del Código Tributario).
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-outline-variant/40">
+              <a href="publicacion-32.html" class="inline-flex items-center gap-1.5 text-primary font-bold text-sm hover:text-secondary transition-colors group">
+                Leer más
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <div class="flex items-center gap-3 text-on-surface-variant/50 text-xs">
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined" style="font-size:14px">person</span>
+                  Guido Aguirre de la R.
+                </span>
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined" style="font-size:14px">download</span>
+                  PDF
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /pub-grid -->
+
+      <!-- Sin resultados -->
+      <div id="no-results" class="hidden text-center py-16">
+        <span class="material-symbols-outlined text-primary/20" style="font-size:64px">search_off</span>
+        <p class="text-on-surface-variant font-light mt-4">No hay publicaciones en esta categoría aún.</p>
+      </div>
+
+      <!-- Paginador -->
+      <nav class="flex justify-center items-center gap-2 mt-14" aria-label="Paginación de publicaciones">
+        <button disabled class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant/40 cursor-not-allowed">
+          <span class="material-symbols-outlined" style="font-size:18px">chevron_left</span>
+        </button>
+        <button class="w-10 h-10 rounded-full bg-primary text-white font-bold text-sm flex items-center justify-center" aria-current="page">1</button>
+        <button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
+          <span class="material-symbols-outlined" style="font-size:18px">chevron_right</span>
+        </button>
+      </nav>
+
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer id="site-footer" class="bg-primary text-white pt-12 md:pt-20 pb-8 overflow-hidden relative">
+  <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+  <div class="relative z-10 max-w-site mx-auto px-6 lg:px-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+      <div class="space-y-6">
+        <img src="img/logo-ichdt.png" alt="Instituto Chileno de Derecho Tributario" class="h-16 w-auto object-contain brightness-0 invert" />
+        <p class="text-blue-200/80 font-light text-sm leading-relaxed">Instituto Chileno de Derecho Tributario<br/>65 años promoviendo el estudio y desarrollo del Derecho Tributario en Chile.</p>
+      </div>
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Menú rápido</h4>
+        <ul class="space-y-3">
+          <li><a href="index.html"          class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Inicio</a></li>
+          <li><a href="quienes-somos.html"  class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Quiénes Somos</a></li>
+          <li><a href="noticias.html"       class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Noticias</a></li>
+          <li><a href="publicaciones.html"  class="text-white text-sm font-semibold hover:pl-1 block">Publicaciones</a></li>
+          <li><a href="index.html#contacto" class="text-blue-200/70 hover:text-white text-sm font-semibold transition-colors hover:pl-1 block">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Contacto</h4>
+        <ul class="space-y-4 text-blue-200/70 text-sm">
+          <li class="flex items-start gap-3"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">location_on</span>Av. Apoquindo 1234, Las Condes, Santiago</li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-lg shrink-0">mail</span>contacto@ichdt.cl</li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-lg shrink-0">call</span>+56 2 2234 5678</li>
+        </ul>
+      </div>
+      <div class="space-y-6">
+        <h4 class="font-headline text-sm font-bold uppercase tracking-widest border-l-4 border-secondary pl-3">Síguenos</h4>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter/X" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">share</span>
+          </a>
+          <a href="#" aria-label="YouTube" class="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all hover:-translate-y-1">
+            <span class="material-symbols-outlined text-white text-lg">play_circle</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-blue-200/40 text-[11px] font-bold uppercase tracking-widest">© 2026 Instituto Chileno de Derecho Tributario. Todos los derechos reservados.</p>
+      <div class="flex gap-5 text-[11px] font-bold text-blue-200/40 uppercase tracking-widest">
+        <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
+        <span>|</span>
+        <a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="btn-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-8 right-8 z-50 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all focus:outline-none"
+  aria-label="Volver al inicio">
+  <span class="material-symbols-outlined text-2xl">arrow_upward</span>
+</button>
+
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-md', window.scrollY > 10);
+    document.getElementById('btn-top').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  document.getElementById('btn-menu').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
+
+  /* Filtro */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const pubCards   = document.querySelectorAll('#pub-grid article');
+  const noResults  = document.getElementById('no-results');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      let visible = 0;
+      pubCards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      noResults.classList.toggle('hidden', visible > 0);
+    });
+  });
+</script>
+
+</body>
+</html>
