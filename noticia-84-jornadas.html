@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html class="light" lang="es" style="scroll-behavior:smooth">
 <head>
@@ -40,7 +41,6 @@
       font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
     }
 
-    /* ─── Nav ─── */
     .nav-link { position: relative; }
     .nav-link::after {
       content: ''; position: absolute;
@@ -49,26 +49,21 @@
     }
     .nav-link:hover::after { width: 100%; }
 
-    /* ─── Mobile menu ─── */
     #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
     #mobile-menu.open { max-height: 400px; }
 
-    /* ─── Scroll to top ─── */
     #btn-top { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
     #btn-top.visible { opacity: 1; visibility: visible; }
 
-    /* ─── Scroll reveal ─── */
     .section-reveal {
       opacity: 0; transform: translateY(28px);
       transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
     }
     .section-reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── Decoración ─── */
     .title-bar { display: block; width: 72px; height: 3px; background: #1BCBF2; border-radius: 99px; margin-top: 14px; }
     .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); }
 
-    /* ─── Badge categoría ─── */
     .cat-badge {
       display: inline-block; font-size: 10px; font-weight: 900;
       letter-spacing: 0.1em; text-transform: uppercase;
@@ -77,7 +72,6 @@
     .cat-eventos  { background: #044D8C; color: #fff; }
     .cat-noticias { background: #1BCBF2; color: #fff; }
 
-    /* ─── Hero azul (sin foto) ─── */
     .article-hero {
       background: #044D8C;
       min-height: 260px;
@@ -105,21 +99,13 @@
       pointer-events: none;
     }
 
-    /* ─── Cuerpo artículo ─── */
     .article-body { font-size: 1.0625rem; line-height: 1.85; color: #44474E; }
     .article-body p { margin-bottom: 1.4em; }
     .article-body strong { color: #1A1C1E; }
 
-    /* ══════════════════════════════════════════
-       CARRUSEL — FIXES:
-       1. carousel-wrap con position:relative para contener las flechas absolutas
-       2. carousel-stage con max-height para no desbordar en desktop ancho
-       3. overflow:hidden en carousel-wrap para cortar cualquier desbordamiento
-    ══════════════════════════════════════════ */
-
     .carousel-wrap {
-      position: relative;           /* FIX 1: contiene las flechas absolutas */
-      overflow: hidden;             /* FIX 3: evita desbordamiento horizontal */
+      position: relative;
+      overflow: hidden;
     }
 
     .carousel-inner {
@@ -129,12 +115,11 @@
       border: 1px solid #E1E2E8;
     }
 
-    /* Pantalla principal */
     .carousel-stage {
       position: relative;
       width: 100%;
       aspect-ratio: 3/2;
-      max-height: 460px;            /* FIX 2: techo de altura en desktop */
+      max-height: 460px;
       background: #f4f7fb;
       overflow: hidden;
     }
@@ -160,7 +145,6 @@
       display: block;
     }
 
-    /* Flechas — superpuestas sobre la imagen, dentro del carousel-inner */
     .car-btn {
       position: absolute;
       top: 50%;
@@ -189,7 +173,6 @@
       .car-btn.next { right: 8px; }
     }
 
-    /* Contador */
     .car-counter {
       position: absolute; bottom: 12px; right: 14px; z-index: 10;
       background: rgba(4,77,140,0.65); color: #fff;
@@ -198,7 +181,6 @@
       backdrop-filter: blur(6px);
     }
 
-    /* Tira de miniaturas */
     .carousel-thumbs {
       display: flex;
       gap: 8px;
@@ -229,7 +211,6 @@
     .car-thumb.active { border-color: #1BCBF2; opacity: 1; box-shadow: 0 0 0 3px rgba(27,203,242,0.2); }
     .car-thumb:hover:not(.active) { opacity: 0.8; border-color: #044D8C; }
 
-    /* Dots (mobile) */
     .car-dots {
       display: none;
       justify-content: center;
@@ -247,7 +228,6 @@
     }
     .car-dot.active { background: #044D8C; transform: scale(1.4); }
 
-    /* ─── Tarjetas relacionadas ─── */
     .related-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .related-card:hover {
       transform: translateY(-4px);
@@ -330,7 +310,7 @@
     <div class="grid lg:grid-cols-[1fr_300px] gap-10 xl:gap-16">
 
       <!-- ── Columna principal ── -->
-      <article class="min-w-0"><!-- min-w-0 evita que grid-item expanda más allá del contenedor -->
+      <article class="min-w-0">
 
         <!-- Cuerpo -->
         <div class="article-body mb-8">
@@ -367,12 +347,9 @@
             <span class="text-on-surface-variant/50 text-sm font-semibold hidden sm:block">20 fotos</span>
           </div>
 
-          <!-- carousel-wrap: position:relative + overflow:hidden contiene flechas y evita scroll horizontal -->
           <div class="carousel-wrap">
-
             <div class="carousel-inner">
 
-              <!-- Pantalla principal — las flechas van DENTRO del stage, sobre la imagen -->
               <div class="carousel-stage" id="carStage">
 
                 <div class="carousel-slide active"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/171/key/a4a042cf4fd6bfb47701cbc8a1653ada" alt="Jornada ICHDT foto 1" loading="eager" /></div>
@@ -396,7 +373,6 @@
                 <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/163/key/0777d5c17d4066b82ab86dff8a46af6f" alt="Jornada ICHDT foto 19" loading="lazy" /></div>
                 <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/162/key/82aa4b0af34c2313a562076992e50aa3" alt="Jornada ICHDT foto 20" loading="lazy" /></div>
 
-                <!-- Flechas dentro del stage, superpuestas sobre la imagen -->
                 <button class="car-btn prev" id="carPrev" aria-label="Foto anterior">
                   <span class="material-symbols-outlined" style="font-size:22px">chevron_left</span>
                 </button>
@@ -404,11 +380,9 @@
                   <span class="material-symbols-outlined" style="font-size:22px">chevron_right</span>
                 </button>
 
-                <!-- Contador -->
                 <span class="car-counter" id="carCounter">1 / 20</span>
               </div>
 
-              <!-- Miniaturas (desktop/tablet) -->
               <div class="carousel-thumbs hidden sm:flex" id="carThumbs">
                 <div class="car-thumb active" onclick="goTo(0)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/171/key/a4a042cf4fd6bfb47701cbc8a1653ada" alt="" /></div>
                 <div class="car-thumb" onclick="goTo(1)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/180/key/045117b0e0a11a242b9765e79cbf113f" alt="" /></div>
@@ -432,11 +406,10 @@
                 <div class="car-thumb" onclick="goTo(19)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/162/key/82aa4b0af34c2313a562076992e50aa3" alt="" /></div>
               </div>
 
-              <!-- Dots (mobile) -->
               <div class="car-dots" id="carDots"></div>
 
-            </div><!-- /carousel-inner -->
-          </div><!-- /carousel-wrap -->
+            </div>
+          </div>
         </section>
 
         <!-- Volver -->
@@ -453,7 +426,6 @@
       <!-- ── Sidebar ─────────────────────────────────────────── -->
       <aside class="space-y-6 lg:pt-0">
 
-        <!-- Noticias relacionadas -->
         <div class="bg-surface-container-low rounded-2xl p-5 card-shadow">
           <h3 class="font-headline text-base font-bold text-primary mb-4 pb-3 border-b border-outline-variant/50">Noticias relacionadas</h3>
           <div class="space-y-4">
@@ -464,9 +436,7 @@
               </div>
               <div class="flex-1 min-w-0">
                 <time class="text-secondary text-[10px] font-black uppercase tracking-widest">Jun 05, 2026</time>
-                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">
-                  Video de las V Jornadas del ICHDT
-                </p>
+                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">Video de las V Jornadas del ICHDT</p>
               </div>
             </a>
 
@@ -476,9 +446,7 @@
               </div>
               <div class="flex-1 min-w-0">
                 <time class="text-secondary text-[10px] font-black uppercase tracking-widest">May 27, 2026</time>
-                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">
-                  Programa: V Jornadas ICHDT — Justicia Tributaria
-                </p>
+                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">Programa: V Jornadas ICHDT — Justicia Tributaria</p>
               </div>
             </a>
 
@@ -488,23 +456,18 @@
               </div>
               <div class="flex-1 min-w-0">
                 <time class="text-secondary text-[10px] font-black uppercase tracking-widest">May 19, 2026</time>
-                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">
-                  Jornadas del ICHDT abordarán los desafíos de la Justicia Tributaria
-                </p>
+                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">Jornadas del ICHDT abordarán los desafíos de la Justicia Tributaria</p>
               </div>
             </a>
 
           </div>
         </div>
 
-        <!-- CTA Hazte Socio -->
         <div class="bg-primary rounded-2xl p-6 text-white text-center">
           <span class="material-symbols-outlined text-secondary mb-3 block" style="font-size:36px">groups</span>
           <h3 class="font-headline text-lg font-bold mb-2">¿Quieres ser parte del ICHDT?</h3>
           <p class="text-blue-200/70 text-sm font-light mb-5">Únete a la comunidad de profesionales del Derecho Tributario.</p>
-          <a href="hazte-socio.html" class="inline-block bg-secondary text-white font-bold text-sm px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">
-            Hazte Socio
-          </a>
+          <a href="hazte-socio.html" class="inline-block bg-secondary text-white font-bold text-sm px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">Hazte Socio</a>
         </div>
 
       </aside>
@@ -604,25 +567,21 @@
 
 <!-- ════════════════ SCRIPTS ════════════════ -->
 <script>
-  /* ── Header ── */
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('shadow-md', window.scrollY > 10);
     document.getElementById('btn-top').classList.toggle('visible', window.scrollY > 400);
   }, { passive: true });
 
-  /* ── Mobile menu ── */
   document.getElementById('btn-menu').addEventListener('click', () => {
     document.getElementById('mobile-menu').classList.toggle('open');
   });
 
-  /* ── Scroll reveal ── */
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.section-reveal').forEach(el => revealObserver.observe(el));
 
-  /* ══ CARRUSEL ══════════════════════════════════════════════ */
   const slides   = document.querySelectorAll('.carousel-slide');
   const thumbs   = document.querySelectorAll('.car-thumb');
   const counter  = document.getElementById('carCounter');
@@ -630,7 +589,6 @@
   let current = 0;
   const total = slides.length;
 
-  /* Crear dots para mobile */
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'car-dot' + (i === 0 ? ' active' : '');
@@ -643,27 +601,22 @@
     slides[current].classList.remove('active');
     thumbs[current].classList.remove('active');
     dotsWrap.children[current].classList.remove('active');
-
     current = (idx + total) % total;
-
     slides[current].classList.add('active');
     thumbs[current].classList.add('active');
     dotsWrap.children[current].classList.add('active');
     counter.textContent = (current + 1) + ' / ' + total;
-
     thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
 
   document.getElementById('carPrev').addEventListener('click', () => goTo(current - 1));
   document.getElementById('carNext').addEventListener('click', () => goTo(current + 1));
 
-  /* Teclado */
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft')  goTo(current - 1);
     if (e.key === 'ArrowRight') goTo(current + 1);
   });
 
-  /* Swipe táctil */
   let touchStartX = 0;
   const stage = document.getElementById('carStage');
   stage.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
@@ -675,3 +628,4 @@
 
 </body>
 </html>
+```
