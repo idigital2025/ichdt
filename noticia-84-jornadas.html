@@ -1,3 +1,6 @@
+Aquí está el código completo listo para copiar:
+
+```html
 <!DOCTYPE html>
 <html class="light" lang="es" style="scroll-behavior:smooth">
 <head>
@@ -110,16 +113,9 @@
     .article-body p { margin-bottom: 1.4em; }
     .article-body strong { color: #1A1C1E; }
 
-    /* ══════════════════════════════════════════
-       CARRUSEL — FIXES:
-       1. carousel-wrap con position:relative para contener las flechas absolutas
-       2. carousel-stage con max-height para no desbordar en desktop ancho
-       3. overflow:hidden en carousel-wrap para cortar cualquier desbordamiento
-    ══════════════════════════════════════════ */
-
     .carousel-wrap {
-      position: relative;           /* FIX 1: contiene las flechas absolutas */
-      overflow: hidden;             /* FIX 3: evita desbordamiento horizontal */
+      position: relative;
+      overflow: hidden;
     }
 
     .carousel-inner {
@@ -134,7 +130,7 @@
       position: relative;
       width: 100%;
       aspect-ratio: 3/2;
-      max-height: 460px;            /* FIX 2: techo de altura en desktop */
+      max-height: 460px;
       background: #f4f7fb;
       overflow: hidden;
     }
@@ -160,7 +156,7 @@
       display: block;
     }
 
-    /* Flechas — superpuestas sobre la imagen, dentro del carousel-inner */
+    /* Flechas — superpuestas sobre la imagen, dentro del carousel-stage */
     .car-btn {
       position: absolute;
       top: 50%;
@@ -319,6 +315,9 @@
       </h1>
       <span class="block w-20 h-1 bg-secondary rounded-full mt-5"></span>
     </div>
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="absolute bottom-0 left-0 w-full h-12 md:h-16 block">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FDFDFD"/>
+    </svg>
   </div>
 
 
@@ -327,7 +326,7 @@
     <div class="grid lg:grid-cols-[1fr_300px] gap-10 xl:gap-16">
 
       <!-- ── Columna principal ── -->
-      <article class="min-w-0"><!-- min-w-0 evita que grid-item expanda más allá del contenedor -->
+      <article class="min-w-0">
 
         <!-- Cuerpo -->
         <div class="article-body mb-8">
@@ -364,12 +363,9 @@
             <span class="text-on-surface-variant/50 text-sm font-semibold hidden sm:block">20 fotos</span>
           </div>
 
-          <!-- carousel-wrap: position:relative + overflow:hidden contiene flechas y evita scroll horizontal -->
           <div class="carousel-wrap">
-
             <div class="carousel-inner">
 
-              <!-- Pantalla principal — las flechas van DENTRO del stage, sobre la imagen -->
               <div class="carousel-stage" id="carStage">
 
                 <div class="carousel-slide active"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/171/key/a4a042cf4fd6bfb47701cbc8a1653ada" alt="Jornada ICHDT foto 1" loading="eager" /></div>
@@ -393,7 +389,6 @@
                 <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/163/key/0777d5c17d4066b82ab86dff8a46af6f" alt="Jornada ICHDT foto 19" loading="lazy" /></div>
                 <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/162/key/82aa4b0af34c2313a562076992e50aa3" alt="Jornada ICHDT foto 20" loading="lazy" /></div>
 
-                <!-- Flechas dentro del stage, superpuestas sobre la imagen -->
                 <button class="car-btn prev" id="carPrev" aria-label="Foto anterior">
                   <span class="material-symbols-outlined" style="font-size:22px">chevron_left</span>
                 </button>
@@ -401,11 +396,9 @@
                   <span class="material-symbols-outlined" style="font-size:22px">chevron_right</span>
                 </button>
 
-                <!-- Contador -->
                 <span class="car-counter" id="carCounter">1 / 20</span>
               </div>
 
-              <!-- Miniaturas (desktop/tablet) -->
               <div class="carousel-thumbs hidden sm:flex" id="carThumbs">
                 <div class="car-thumb active" onclick="goTo(0)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/171/key/a4a042cf4fd6bfb47701cbc8a1653ada" alt="" /></div>
                 <div class="car-thumb" onclick="goTo(1)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/180/key/045117b0e0a11a242b9765e79cbf113f" alt="" /></div>
@@ -429,11 +422,10 @@
                 <div class="car-thumb" onclick="goTo(19)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/162/key/82aa4b0af34c2313a562076992e50aa3" alt="" /></div>
               </div>
 
-              <!-- Dots (mobile) -->
               <div class="car-dots" id="carDots"></div>
 
-            </div><!-- /carousel-inner -->
-          </div><!-- /carousel-wrap -->
+            </div>
+          </div>
         </section>
 
         <!-- Volver -->
@@ -450,7 +442,6 @@
       <!-- ── Sidebar ─────────────────────────────────────────── -->
       <aside class="space-y-6 lg:pt-0">
 
-        <!-- Noticias relacionadas -->
         <div class="bg-surface-container-low rounded-2xl p-5 card-shadow">
           <h3 class="font-headline text-base font-bold text-primary mb-4 pb-3 border-b border-outline-variant/50">Noticias relacionadas</h3>
           <div class="space-y-4">
@@ -461,9 +452,7 @@
               </div>
               <div class="flex-1 min-w-0">
                 <time class="text-secondary text-[10px] font-black uppercase tracking-widest">Jun 05, 2026</time>
-                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">
-                  Video de las V Jornadas del ICHDT
-                </p>
+                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">Video de las V Jornadas del ICHDT</p>
               </div>
             </a>
 
@@ -473,9 +462,7 @@
               </div>
               <div class="flex-1 min-w-0">
                 <time class="text-secondary text-[10px] font-black uppercase tracking-widest">May 27, 2026</time>
-                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">
-                  Programa: V Jornadas ICHDT — Justicia Tributaria
-                </p>
+                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">Programa: V Jornadas ICHDT — Justicia Tributaria</p>
               </div>
             </a>
 
@@ -485,23 +472,18 @@
               </div>
               <div class="flex-1 min-w-0">
                 <time class="text-secondary text-[10px] font-black uppercase tracking-widest">May 19, 2026</time>
-                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">
-                  Jornadas del ICHDT abordarán los desafíos de la Justicia Tributaria
-                </p>
+                <p class="font-headline text-sm font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2 mt-0.5">Jornadas del ICHDT abordarán los desafíos de la Justicia Tributaria</p>
               </div>
             </a>
 
           </div>
         </div>
 
-        <!-- CTA Hazte Socio -->
         <div class="bg-primary rounded-2xl p-6 text-white text-center">
           <span class="material-symbols-outlined text-secondary mb-3 block" style="font-size:36px">groups</span>
           <h3 class="font-headline text-lg font-bold mb-2">¿Quieres ser parte del ICHDT?</h3>
           <p class="text-blue-200/70 text-sm font-light mb-5">Únete a la comunidad de profesionales del Derecho Tributario.</p>
-          <a href="hazte-socio.html" class="inline-block bg-secondary text-white font-bold text-sm px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">
-            Hazte Socio
-          </a>
+          <a href="hazte-socio.html" class="inline-block bg-secondary text-white font-bold text-sm px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">Hazte Socio</a>
         </div>
 
       </aside>
@@ -627,7 +609,6 @@
   let current = 0;
   const total = slides.length;
 
-  /* Crear dots para mobile */
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'car-dot' + (i === 0 ? ' active' : '');
@@ -654,13 +635,11 @@
   document.getElementById('carPrev').addEventListener('click', () => goTo(current - 1));
   document.getElementById('carNext').addEventListener('click', () => goTo(current + 1));
 
-  /* Teclado */
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft')  goTo(current - 1);
     if (e.key === 'ArrowRight') goTo(current + 1);
   });
 
-  /* Swipe táctil */
   let touchStartX = 0;
   const stage = document.getElementById('carStage');
   stage.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
@@ -672,3 +651,4 @@
 
 </body>
 </html>
+```
