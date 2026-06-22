@@ -115,13 +115,9 @@
        CARRUSEL
     ══════════════════════════════════════════ */
 
-    /* Contenedor externo: solo posiciona las flechas */
     .carousel-wrap {
       position: relative;
-      padding: 0 32px;   /* espacio para las flechas laterales */
-    }
-    @media (max-width: 640px) {
-      .carousel-wrap { padding: 0; }
+      overflow: hidden;
     }
 
     /* Caja interna: aplica bordes redondeados y recorta todo */
@@ -132,16 +128,16 @@
       border: 1px solid #E1E2E8;
     }
 
-    /* Pantalla principal */
     .carousel-stage {
       position: relative;
       width: 100%;
       aspect-ratio: 3/2;
+      max-height: 460px;
       background: #f4f7fb;
       overflow: hidden;
     }
     @media (max-width: 640px) {
-      .carousel-stage { aspect-ratio: 4/3; }
+      .carousel-stage { aspect-ratio: 4/3; max-height: 280px; }
     }
 
     .carousel-slide {
@@ -160,31 +156,27 @@
       display: block;
     }
 
-    /* Flechas — a los costados del carousel-inner */
     .car-btn {
-      position: absolute; top: calc(50% - 28px); transform: translateY(-50%);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
       z-index: 10;
-      background: #fff;
-      border: 1.5px solid #E1E2E8;
+      background: rgba(255,255,255,0.92);
+      border: 1.5px solid rgba(255,255,255,0.6);
       cursor: pointer; color: #044D8C;
       width: 42px; height: 42px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 2px 10px rgba(4,77,140,0.10);
-      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      transition: background 0.2s, color 0.2s, transform 0.2s;
     }
     .car-btn:hover {
-      background: #1BCBF2; color: #fff; border-color: #1BCBF2;
+      background: #1BCBF2; color: #fff;
       transform: translateY(-50%) scale(1.08);
     }
-    .car-btn.prev { left: 0; }
-    .car-btn.next { right: 0; }
+    .car-btn.prev { left: 12px; }
+    .car-btn.next { right: 12px; }
     @media (max-width: 640px) {
-      .car-btn {
-        top: calc(50% - 28px);
-        width: 36px; height: 36px;
-        background: rgba(255,255,255,0.85);
-        backdrop-filter: blur(4px);
-      }
+      .car-btn { width: 36px; height: 36px; }
       .car-btn.prev { left: 8px; }
       .car-btn.next { right: 8px; }
     }
@@ -256,7 +248,7 @@
   </style>
 </head>
 
-<body class="bg-background text-on-surface font-body selection:bg-secondary/30">
+<body class="bg-background text-on-surface font-body selection:bg-secondary/30 overflow-x-hidden">
 
 <!-- ════════════════ HEADER ════════════════ -->
 <header id="site-header" class="fixed top-0 left-0 w-full z-50 bg-white border-b border-outline-variant/50 transition-shadow duration-300">
@@ -320,6 +312,9 @@
       </h1>
       <span class="block w-20 h-1 bg-secondary rounded-full mt-5"></span>
     </div>
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="absolute bottom-0 left-0 w-full h-12 md:h-16 block">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FDFDFD"/>
+    </svg>
   </div>
 
 
@@ -328,7 +323,7 @@
     <div class="grid lg:grid-cols-[1fr_300px] gap-10 xl:gap-16">
 
       <!-- ── Columna principal ── -->
-      <article>
+      <article class="min-w-0">
 
         <!-- Cuerpo -->
         <div class="article-body mb-8">
@@ -366,19 +361,17 @@
           </div>
 
           <div class="carousel-wrap">
-
-            <!-- Flechas (fuera del inner para no quedar recortadas) -->
-            <button class="car-btn prev" id="carPrev" aria-label="Foto anterior">
-              <span class="material-symbols-outlined" style="font-size:22px">chevron_left</span>
-            </button>
-            <button class="car-btn next" id="carNext" aria-label="Foto siguiente">
-              <span class="material-symbols-outlined" style="font-size:22px">chevron_right</span>
-            </button>
-
             <div class="carousel-inner">
 
             <!-- Pantalla principal -->
             <div class="carousel-stage" id="carStage">
+
+              <button class="car-btn prev" id="carPrev" aria-label="Foto anterior">
+                <span class="material-symbols-outlined" style="font-size:22px">chevron_left</span>
+              </button>
+              <button class="car-btn next" id="carNext" aria-label="Foto siguiente">
+                <span class="material-symbols-outlined" style="font-size:22px">chevron_right</span>
+              </button>
 
               <div class="carousel-slide active"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/171/key/a4a042cf4fd6bfb47701cbc8a1653ada" alt="Jornada ICHDT foto 1" loading="eager" /></div>
               <div class="carousel-slide"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/180/key/045117b0e0a11a242b9765e79cbf113f" alt="Jornada ICHDT foto 2" loading="lazy" /></div>
@@ -429,10 +422,8 @@
               <div class="car-thumb" onclick="goTo(19)"><img src="https://ichdt.cl/download/index/imagenactividadweb/id/162/key/82aa4b0af34c2313a562076992e50aa3" alt="" /></div>
             </div>
 
-            <!-- Dots (mobile) -->
+              <div class="car-dots" id="carDots"></div>
             </div><!-- /carousel-inner -->
-
-            <div class="car-dots" id="carDots"></div>
           </div><!-- /carousel-wrap -->
         </section>
 
